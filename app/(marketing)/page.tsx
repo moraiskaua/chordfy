@@ -1,9 +1,7 @@
-import { Button } from '@/components/ui/button';
-
 const Home = () => {
   return (
     <div>
-      <p>Home Page</p>
+      <p>Lorem Ipsum...</p>
     </div>
   );
 };
