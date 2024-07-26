@@ -1,8 +1,12 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { HeroAvatar } from './HeroAvatar';
 import Link from 'next/link';
 import { routes } from '@/constants/routes';
 import { SidebarItem } from '@/components/SidebarItem';
+import { Button } from './ui/Button';
+import { signOut } from 'next-auth/react';
 
 interface SidebarProps {
   className?: string;
@@ -30,7 +34,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         <SidebarItem label="Quests" href={routes.QUESTS} icon="/quests.svg" />
         <SidebarItem label="Shop" href={routes.SHOP} icon="/shop.svg" />
       </div>
-      <div className="p-4">Exit</div>
+      <Button className="p-4" onClick={() => signOut()}>
+        Exit
+      </Button>
     </div>
   );
 };

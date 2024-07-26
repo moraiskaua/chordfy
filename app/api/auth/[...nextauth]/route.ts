@@ -51,6 +51,13 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: 'jwt',
   },
+  callbacks: {
+    session({ session, token }) {
+      session.user.id = token.sub as string;
+
+      return session;
+    },
+  },
   secret: Env.NEXTAUTH_SECRET,
 };
 
