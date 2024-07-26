@@ -24,10 +24,10 @@ model User {
 
 model Account {
   id                String  @id @default(uuid()) @db.Uuid
-  userId            String
+  userId            String  @db.Uuid
   type              String
   provider          String
-  providerAccountId String
+  providerAccountId String  @db.Uuid
   refresh_token     String?
   access_token      String?
   expires_at        Int?
@@ -39,13 +39,24 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
   id           String   @id @default(uuid()) @db.Uuid
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.Uuid
   expires      DateTime
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Course {
+  id    String @id @default(uuid()) @db.Uuid
+  title String
+  image String
+
+  @@map("courses")
 }
