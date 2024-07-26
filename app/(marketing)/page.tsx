@@ -1,8 +1,11 @@
 import { Button } from '@/components/ui/Button';
+import { routes } from '@/constants/routes';
+import { getServerSession } from 'next-auth';
 import Image from 'next/image';
+import Link from 'next/link';
 
-const Home = () => {
-  const signedIn = false;
+const Home = async () => {
+  const session = await getServerSession();
 
   return (
     <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
@@ -14,18 +17,24 @@ const Home = () => {
           Listen and learn music with Chordfy.
         </h1>
         <div className="flex flex-col items-center gap-y-3 max-w-[330px] w-full">
-          {signedIn ? (
-            <Button size="lg" variant="default" className="w-full">
-              Continue learning
-            </Button>
+          {session?.user ? (
+            <Link href={routes.LEARN} className="w-full">
+              <Button size="lg" variant="default" className="w-full">
+                Continue learning
+              </Button>
+            </Link>
           ) : (
             <>
-              <Button size="lg" variant="default" className="w-full">
-                Get started
-              </Button>
-              <Button size="lg" variant="outline" className="w-full">
-                I already have an account
-              </Button>
+              <Link href={`${routes.AUTH}?form=REGISTER`} className="w-full">
+                <Button size="lg" variant="default" className="w-full">
+                  Get started
+                </Button>
+              </Link>
+              <Link href={routes.AUTH} className="w-full">
+                <Button size="lg" variant="outline" className="w-full">
+                  I already have an account
+                </Button>
+              </Link>
             </>
           )}
         </div>

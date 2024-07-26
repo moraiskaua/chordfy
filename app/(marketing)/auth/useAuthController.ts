@@ -1,14 +1,19 @@
 import axios from 'axios';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 type VariantType = 'LOGIN' | 'REGISTER';
 
 export const useAuthController = () => {
-  const [variant, setVariant] = useState<VariantType>('LOGIN');
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const form = searchParams.get('form')?.toUpperCase();
+  const [variant, setVariant] = useState<VariantType>(
+    form === 'REGISTER' ? 'REGISTER' : 'LOGIN',
+  );
+
   const router = useRouter();
 
   const handleToggleVariant = () =>
