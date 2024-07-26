@@ -25,6 +25,7 @@ const AuthPage: React.FC<AuthPageProps> = ({}) => {
         {variant === 'REGISTER' && (
           <Input
             id="name"
+            placeholder="Name"
             type="text"
             register={register}
             errors={errors}
@@ -33,6 +34,7 @@ const AuthPage: React.FC<AuthPageProps> = ({}) => {
         )}
         <Input
           id="email"
+          placeholder="E-mail"
           type="email"
           register={register}
           errors={errors}
@@ -40,6 +42,7 @@ const AuthPage: React.FC<AuthPageProps> = ({}) => {
         />
         <Input
           id="password"
+          placeholder="Password"
           type="password"
           register={register}
           errors={errors}

@@ -7,6 +7,7 @@ interface InputProps {
   required?: boolean;
   disabled?: boolean;
   errors: FieldErrors;
+  placeholder?: string;
   register: UseFormRegister<FieldValues>;
 }
 
@@ -14,9 +15,10 @@ export const Input: React.FC<InputProps> = ({
   id,
   type,
   disabled,
-  register,
   required,
   errors,
+  placeholder,
+  register,
 }) => {
   return (
     <input
@@ -25,6 +27,7 @@ export const Input: React.FC<InputProps> = ({
       autoComplete={id}
       disabled={disabled}
       {...register(id, { required })}
+      placeholder={placeholder}
       className={cn(
         `bg-zinc-200 p-2 rounded-md outline-none`,
         errors[id] && 'focus:ring-rose-500',
