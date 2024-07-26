@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { signIn } from 'next-auth/react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -14,7 +14,7 @@ export const useAuthController = () => {
     form === 'REGISTER' ? 'REGISTER' : 'LOGIN',
   );
 
-  const router = useRouter();
+  const session = useSession();
 
   const handleToggleVariant = () =>
     setVariant(prevVariant => (prevVariant === 'LOGIN' ? 'REGISTER' : 'LOGIN'));
@@ -55,7 +55,6 @@ export const useAuthController = () => {
 
             if (callback?.ok && !callback?.error) {
               console.log('Logged in!');
-              router.push('/learn');
             }
           });
         }
@@ -96,6 +95,7 @@ export const useAuthController = () => {
     variant,
     isLoading,
     errors,
+    session,
     handleToggleVariant,
     register,
     onSubmit,

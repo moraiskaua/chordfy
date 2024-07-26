@@ -1,6 +1,7 @@
 import { Footer } from '@/app/(marketing)/components/Footer';
 import { Header } from '@/app/(marketing)/components/Header';
 import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
 interface MarketingLayoutProps {

@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/Button';
 import { useAuthController } from './useAuthController';
 import { Input } from '@/components/Input';
 import { FaGoogle } from 'react-icons/fa';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 interface AuthPageProps {}
 
@@ -12,12 +14,17 @@ const AuthPage: React.FC<AuthPageProps> = ({}) => {
     variant,
     isLoading,
     errors,
+    session,
     handleToggleVariant,
     register,
     handleSubmit,
     onSubmit,
     socialAction,
   } = useAuthController();
+
+  if (session.status === 'authenticated') {
+    return redirect('/learn');
+  }
 
   return (
     <div className="max-w-[400px] mx-auto w-full">
