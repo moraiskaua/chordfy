@@ -1,8 +1,10 @@
 import Avatar from '@/components/Avatar';
 import { HeroAvatar } from '@/components/HeroAvatar';
 import { Button } from '@/components/ui/Button';
+import { routes } from '@/constants/routes';
 import { User } from 'next-auth';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface HeaderProps {
   user?: User;
@@ -17,9 +19,11 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
         {user ? (
           <Avatar user={user} />
         ) : (
-          <Button size="lg" variant="ghost">
-            Login
-          </Button>
+          <Link href={routes.AUTH}>
+            <Button size="lg" variant="ghost">
+              Login
+            </Button>
+          </Link>
         )}
       </div>
     </header>
