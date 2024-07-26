@@ -5,14 +5,17 @@ import { HeroAvatar } from './HeroAvatar';
 import Link from 'next/link';
 import { routes } from '@/constants/routes';
 import { SidebarItem } from '@/components/SidebarItem';
+import Avatar from './Avatar';
+import { User } from 'next-auth';
 import { Button } from './ui/Button';
 import { signOut } from 'next-auth/react';
 
 interface SidebarProps {
   className?: string;
+  user: User;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ className, user }) => {
   return (
     <div
       className={cn(
@@ -34,9 +37,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         <SidebarItem label="Quests" href={routes.QUESTS} icon="/quests.svg" />
         <SidebarItem label="Shop" href={routes.SHOP} icon="/shop.svg" />
       </div>
-      <Button className="p-4" onClick={() => signOut()}>
-        Exit
-      </Button>
+
+      <div className="flex items-center justify-between">
+        <Avatar user={user} />
+        <Button onClick={() => signOut()} variant="danger">
+          Exit
+        </Button>
+      </div>
     </div>
   );
 };
