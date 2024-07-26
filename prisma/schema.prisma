@@ -24,7 +24,7 @@ model User {
 
 model Account {
   id                String  @id @default(uuid()) @db.Uuid
-  userId            String  @db.Uuid
+  user_id           String  @db.Uuid
   type              String
   provider          String
   providerAccountId String  @db.Uuid
@@ -36,19 +36,19 @@ model Account {
   id_token          String?
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
 model Session {
-  id           String   @id @default(uuid()) @db.Uuid
-  sessionToken String   @unique
-  userId       String   @db.Uuid
-  expires      DateTime
+  id            String   @id @default(uuid()) @db.Uuid
+  session_token String   @unique
+  user_id       String   @db.Uuid
+  expires       DateTime
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -58,5 +58,21 @@ model Course {
   title String
   image String
 
+  UserProgress UserProgress[]
+
   @@map("courses")
+}
+
+model UserProgress {
+  id               String @id @default(uuid()) @db.Uuid
+  user_id          String @db.Uuid
+  user_name        String
+  user_image       String @default("/mascot.svg")
+  active_course_id String @db.Uuid
+  hearts           Int    @default(5)
+  points           Int    @default(0)
+
+  Course Course @relation(fields: [active_course_id], references: [id], onDelete: Cascade)
+
+  @@map("users_progress")
 }
