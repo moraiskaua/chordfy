@@ -1,10 +1,12 @@
 import { coursesService } from '@/services/coursesService';
 import { List } from './components/List';
+import { userService } from '@/services/userService';
 
 interface CoursesPageProps {}
 
 const CoursesPage: React.FC<CoursesPageProps> = async ({}) => {
   const courses = await coursesService.getAll();
+  const user = await userService.getUserProgress();
 
   return (
     <div className="h-full max-w-[912px] px-3 mx-auto">

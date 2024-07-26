@@ -8,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid()) @db.Uuid
-  image      String?
-  name       String?
-  email      String?  @unique
-  password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id            String    @id @default(uuid()) @db.Uuid
+  image         String?
+  name          String?
+  email         String?   @unique
+  password      String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  emailVerified DateTime?
 
   Account Account[]
   Session Session[]
@@ -24,10 +25,10 @@ model User {
 
 model Account {
   id                String  @id @default(uuid()) @db.Uuid
-  user_id           String  @db.Uuid
+  userId            String  @db.Uuid
   type              String
   provider          String
-  providerAccountId String  @db.Uuid
+  providerAccountId String
   refresh_token     String?
   access_token      String?
   expires_at        Int?
@@ -36,7 +37,7 @@ model Account {
   id_token          String?
   session_state     String?
 
-  User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -44,11 +45,11 @@ model Account {
 
 model Session {
   id            String   @id @default(uuid()) @db.Uuid
+  userId        String   @db.Uuid
   session_token String   @unique
-  user_id       String   @db.Uuid
   expires       DateTime
 
-  User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -65,7 +66,7 @@ model Course {
 
 model UserProgress {
   id               String @id @default(uuid()) @db.Uuid
-  user_id          String @db.Uuid
+  userId           String @db.Uuid
   user_name        String
   user_image       String @default("/mascot.svg")
   active_course_id String @db.Uuid
