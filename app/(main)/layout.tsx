@@ -1,12 +1,21 @@
 import { MobileHeader } from '@/components/MobileHeader';
 import { Sidebar } from '@/components/Sidebar';
+import { routes } from '@/constants/routes';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = async ({ children }) => {
+  const session = await getServerSession();
+
+  if (!session) {
+    redirect(routes.AUTH);
+  }
+
   return (
     <>
       <MobileHeader />

@@ -1,8 +1,6 @@
 import { coursesService } from '@/services/courses';
 import { List } from './components/List';
 import { userService } from '@/services/userService';
-import { getSession } from 'next-auth/react';
-import { getServerSession } from 'next-auth';
 
 interface CoursesPageProps {}
 

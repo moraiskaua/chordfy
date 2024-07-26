@@ -45,7 +45,7 @@ export const useAuthController = () => {
             redirect: false,
           }).then(callback => {
             if (callback?.error) {
-              console.log('Invalid credentials!');
+              console.log('Invalid credentials!', callback);
             }
 
             if (callback?.ok && !callback?.error) {
@@ -69,6 +69,7 @@ export const useAuthController = () => {
 
     try {
       signIn(action, {
+        callbackUrl: '/learn',
         redirect: false,
       }).then(callback => {
         if (callback?.error) {
