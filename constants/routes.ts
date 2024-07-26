@@ -3,4 +3,5 @@ export const routes = {
   LEADERBOARD: '/leaderboard',
   QUESTS: '/quests',
   SHOP: '/shop',
+  COURSES: '/courses',
 };
