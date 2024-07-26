@@ -10,5 +10,8 @@ export const getUserProgress = cache(async () => {
     where: {
       userId: session?.user.id,
     },
+    include: {
+      ActiveCourse: true,
+    },
   });
 });
