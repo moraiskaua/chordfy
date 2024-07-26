@@ -5,7 +5,7 @@ import { Card } from './Card';
 
 interface ListProps {
   courses: Course[];
-  activeCourseId: string;
+  activeCourseId?: string;
 }
 
 export const List: React.FC<ListProps> = ({ courses, activeCourseId }) => {
