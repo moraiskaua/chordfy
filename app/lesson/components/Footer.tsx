@@ -2,6 +2,7 @@ import { useKey, useMedia } from 'react-use';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
+import { routes } from '@/constants/routes';
 
 interface FooterProps {
   onCheck: () => void;
@@ -39,6 +40,17 @@ export const Footer: React.FC<FooterProps> = ({
             <XCircle className="size-6 lg:size-10 mr-4" />
             Try again.
           </div>
+        )}
+        {status === 'COMPLETED' && (
+          <Button
+            variant="default"
+            size={isMobile ? 'sm' : 'lg'}
+            onClick={() =>
+              (window.location.href = `${routes.LESSON}/${lessonId}`)
+            }
+          >
+            Practice again
+          </Button>
         )}
         <Button
           disabled={disabled}
