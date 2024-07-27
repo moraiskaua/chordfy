@@ -110,8 +110,9 @@ model Challenge {
   order    Int           @db.Integer
   type     ChallengeType
 
-  lesson          Lesson            @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  challengeOption ChallengeOption[]
+  lesson            Lesson              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  challengeOption   ChallengeOption[]
+  challengeProgress ChallengeProgress[]
 
   @@map("challenges")
 }
@@ -125,11 +126,20 @@ model ChallengeOption {
   id          String  @id @default(uuid()) @db.Uuid
   challengeId String  @db.Uuid
   text        String  @db.Text
-  correct     Boolean
+  correct     Boolean @db.Boolean
   image       String  @db.Text
   audio       String  @db.Text
 
   challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 
   @@map("challenge_options")
+}
+
+model ChallengeProgress {
+  id          String  @id @default(uuid()) @db.Uuid
+  userId      String  @db.Uuid
+  challengeId String  @db.Uuid
+  completed   Boolean @default(false) @db.Boolean
+
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 }
