@@ -1,6 +1,7 @@
 'use client';
 
 import { Challenge } from '../Challenge';
+import { Footer } from '../Footer';
 import { Header } from '../Header';
 import { QuestionBubble } from '../QuestionBubble';
 import { LessonChallengeType, useQuizController } from './useQuizController';
@@ -65,6 +66,7 @@ export const Quiz: React.FC<QuizProps> = ({
           </div>
         </div>
       </div>
+      <Footer onCheck={() => {}} status={'CORRECT'} />
     </>
   );
 };
