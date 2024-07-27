@@ -9,10 +9,10 @@ datasource db {
 
 model User {
   id            String    @id @default(uuid()) @db.Uuid
-  image         String?
-  name          String?
+  image         String?   @db.Text
+  name          String?   @db.Text
   email         String?   @unique
-  password      String?
+  password      String?   @db.Text
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
   emailVerified DateTime?
@@ -86,7 +86,7 @@ model Unit {
   order       Int    @db.Integer
 
   course Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  Lesson Lesson[]
+  lesson Lesson[]
 
   @@map("units")
 }
@@ -97,7 +97,39 @@ model Lesson {
   title  String @db.Text
   order  Int    @db.Integer
 
-  unit Unit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  unit      Unit        @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  challenge Challenge[]
 
   @@map("lessons")
+}
+
+model Challenge {
+  id       String        @id @default(uuid()) @db.Uuid
+  lessonId String        @db.Uuid
+  question String        @db.Text
+  order    Int           @db.Integer
+  type     ChallengeType
+
+  lesson          Lesson            @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  challengeOption ChallengeOption[]
+
+  @@map("challenges")
+}
+
+enum ChallengeType {
+  SELECT
+  ASSIST
+}
+
+model ChallengeOption {
+  id          String  @id @default(uuid()) @db.Uuid
+  challengeId String  @db.Uuid
+  text        String  @db.Text
+  correct     Boolean
+  image       String  @db.Text
+  audio       String  @db.Text
+
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@map("challenge_options")
 }
