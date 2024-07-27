@@ -93,7 +93,7 @@ const main = async () => {
           image: '/E.svg',
           text: 'E',
           correct: true,
-          audio: '/E.mp3',
+          audio: '/piano/E.mp3',
         },
         {
           id: '89f56536-7fa4-42d8-95b0-6de9e644440d',
@@ -101,7 +101,7 @@ const main = async () => {
           image: '/F.svg',
           text: 'F',
           correct: false,
-          audio: '/F.mp3',
+          audio: '/piano/F.mp3',
         },
       ],
     });

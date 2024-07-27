@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils';
 import { ChallengeType } from '@prisma/client';
 import Image from 'next/image';
+import { useCallback } from 'react';
+import { useAudio, useKey } from 'react-use';
 
 interface CardProps {
   id: string;
@@ -27,11 +29,22 @@ export const Card: React.FC<CardProps> = ({
   status,
   type,
 }) => {
+  const [sound, _, controls] = useAudio({ src: audio || '' });
+
+  const handleClick = useCallback(() => {
+    if (disabled) return;
+
+    controls.play();
+    onClick();
+  }, [disabled, controls, onClick]);
+
+  useKey(shortcut, handleClick, {}, [handleClick]);
+
   return (
     <div
       className={cn(
         'g-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2',
-        selected && 'border-[#8152AB]/35 bg-[#C47BFD]/35 hover:bg-none',
+        selected && 'border-[#8152AB]/35 bg-[#C47BFD]/35 hover:bg-[#C47BFD]/25',
         selected &&
           status === 'CORRECT' &&
           'border-green-300 bg-green-100 hover:bg-green-100',
@@ -41,8 +54,9 @@ export const Card: React.FC<CardProps> = ({
         disabled && 'pointer-events-none hover:bg-white',
         type === 'ASSIST' && 'lg:p-3 w-full',
       )}
-      onClick={() => {}}
+      onClick={handleClick}
     >
+      {sound}
       {image && (
         <div className="relative aspect-square mb-4 max-h-[80px] lg:max-h-[150px] w-full">
           <Image src={image} alt={text} fill />

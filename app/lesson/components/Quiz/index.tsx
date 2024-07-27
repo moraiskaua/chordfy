@@ -20,12 +20,20 @@ export const Quiz: React.FC<QuizProps> = ({
   initialLessonChallenges,
   userSubscription,
 }) => {
-  const { hearts, percentage, title, challenges, currentChallenge, options } =
-    useQuizController(
-      initialHearts,
-      initialPercentage,
-      initialLessonChallenges,
-    );
+  const {
+    hearts,
+    percentage,
+    title,
+    currentChallenge,
+    options,
+    status,
+    selectedOption,
+    onSelect,
+  } = useQuizController(
+    initialHearts,
+    initialPercentage,
+    initialLessonChallenges,
+  );
 
   return (
     <>
@@ -47,9 +55,9 @@ export const Quiz: React.FC<QuizProps> = ({
 
               <Challenge
                 options={options}
-                onSelect={() => {}}
-                status="NONE"
-                selectedOption={undefined}
+                onSelect={onSelect}
+                status={status}
+                selectedOption={selectedOption}
                 disabled={false}
                 type={currentChallenge.type}
               />

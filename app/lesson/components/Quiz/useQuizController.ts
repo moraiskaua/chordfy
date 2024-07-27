@@ -19,6 +19,8 @@ export const useQuizController = (
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(initialPercentage);
   const [challenges, setChallenges] = useState(initialLessonChallenges);
+  const [selectedOption, setSelectedOption] = useState<string>();
+  const [status, setStatus] = useState<'CORRECT' | 'WRONG' | 'NONE'>('NONE');
   const [activeIndex, setActiveIndex] = useState(() => {
     const uncompletedIndex = challenges.findIndex(
       challenge => !challenge.completed,
@@ -30,10 +32,25 @@ export const useQuizController = (
   const currentChallenge = challenges[activeIndex];
   const options = currentChallenge.challengeOptions ?? [];
 
+  const onSelect = (id: string) => {
+    if (status !== 'NONE') return;
+
+    setSelectedOption(id);
+  };
+
   const title =
     currentChallenge.type === 'ASSIST'
       ? 'Select the correct answer'
       : currentChallenge.question;
 
-  return { hearts, percentage, challenges, currentChallenge, title, options };
+  return {
+    hearts,
+    percentage,
+    selectedOption,
+    currentChallenge,
+    title,
+    options,
+    status,
+    onSelect,
+  };
 };
