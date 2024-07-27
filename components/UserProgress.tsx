@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { Button } from './ui/Button';
 import Image from 'next/image';
 import { InfinityIcon } from 'lucide-react';
+import { Course } from '@prisma/client';
 
 interface UserProgressProps {
-  activeCourse: { title: string; icon: string };
+  activeCourse: Course;
   hearts: number;
   points: number;
   hasActiveSubscriptions: boolean;
@@ -22,7 +23,7 @@ export const UserProgress: React.FC<UserProgressProps> = ({
       <Link href={routes.COURSES}>
         <Button variant="default">
           <Image
-            src={activeCourse.icon}
+            src={activeCourse.image}
             alt={activeCourse.title}
             width={32}
             height={32}

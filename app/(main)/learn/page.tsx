@@ -19,14 +19,14 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
     <div className="flex flex-row-reverse gap-[48px] px-6">
       <StickyWrapper>
         <UserProgress
-          activeCourse={{ title: 'Escales', icon: '/piano.svg' }}
-          hearts={5}
-          points={100}
+          activeCourse={userProgress.ActiveCourse}
+          hearts={userProgress.hearts}
+          points={userProgress.points}
           hasActiveSubscriptions={false}
         />
       </StickyWrapper>
       <FeedWrapper>
-        <Header title="Escales" />
+        <Header title={userProgress.ActiveCourse.title} />
         <div className="space-y-4">
           <div />
         </div>
