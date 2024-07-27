@@ -1,5 +1,7 @@
+import { updateChallengeProgress } from '@/actions/updateChallengeProgress';
 import { Challenge, ChallengeOption, ChallengeType } from '@prisma/client';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
+import { toast } from 'sonner';
 
 export interface LessonChallengeType {
   id: string;
@@ -16,6 +18,7 @@ export const useQuizController = (
   initialPercentage: number,
   initialLessonChallenges: LessonChallengeType[],
 ) => {
+  const [pending, startTransition] = useTransition();
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(initialPercentage);
   const [challenges, setChallenges] = useState(initialLessonChallenges);
@@ -31,11 +34,55 @@ export const useQuizController = (
 
   const currentChallenge = challenges[activeIndex];
   const options = currentChallenge.challengeOptions ?? [];
+  const onNext = () => setActiveIndex(current => current + 1);
 
   const onSelect = (id: string) => {
     if (status !== 'NONE') return;
 
     setSelectedOption(id);
+  };
+
+  const onContinue = () => {
+    if (!selectedOption) return;
+
+    if (status === 'WRONG') {
+      setStatus('NONE');
+      setSelectedOption(undefined);
+      return;
+    }
+
+    if (status === 'CORRECT') {
+      onNext();
+      setStatus('NONE');
+      setSelectedOption(undefined);
+      return;
+    }
+
+    const correctOption = options.find(option => option.correct);
+
+    if (!correctOption) return;
+
+    if (correctOption && correctOption.id === selectedOption) {
+      startTransition(() => {
+        updateChallengeProgress(currentChallenge.id)
+          .then(response => {
+            if (response?.error === 'hearts') {
+              console.log('Missing hearts!');
+              return;
+            }
+
+            setStatus('CORRECT');
+            setPercentage(prev => prev + 100 / challenges.length);
+
+            if (initialPercentage === 100) {
+              setHearts(prev => Math.min(prev + 1, 5));
+            }
+          })
+          .catch(() => toast.error('Something went wrong.'));
+      });
+    } else {
+      console.log('incorrect option');
+    }
   };
 
   const title =
@@ -51,6 +98,8 @@ export const useQuizController = (
     title,
     options,
     status,
+    pending,
     onSelect,
+    onContinue,
   };
 };

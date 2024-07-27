@@ -10,17 +10,12 @@ import { getMySession } from '@/helpers/getMySession';
 
 export const updateUserProgress = async (courseId: string) => {
   const session = await getMySession();
-  console.log(courseId);
 
-  if (!session?.user || !session?.user.id) {
-    throw new Error('Unauthorized!');
-  }
+  if (!session?.user) throw new Error('Unauthorized!');
 
   const course = await coursesService.getById(courseId);
 
-  if (!course) {
-    throw new Error('Course not found!');
-  }
+  if (!course) throw new Error('Course not found!');
 
   // Continue when lessions is added.
   // if (!course.units.length || !course.units[0].length) {
@@ -58,4 +53,62 @@ export const updateUserProgress = async (courseId: string) => {
   revalidatePath(routes.COURSES);
   revalidatePath(routes.LEARN);
   redirect(routes.LEARN);
+};
+
+export const reduceHearts = async (challengeId: string) => {
+  const session = await getMySession();
+
+  if (session?.user) throw new Error('Unauthorized!');
+
+  const currentUserProgress = await userService.getProgress();
+
+  const challenge = await prisma.challenge.findFirst({
+    where: {
+      id: challengeId,
+    },
+  });
+
+  if (!challenge) throw new Error('Challenge not found!');
+
+  const existingChallengProgress = await prisma.challengeProgress.findFirst({
+    where: {
+      AND: [
+        {
+          userId: session?.user.id,
+        },
+        {
+          challengeId: challengeId,
+        },
+      ],
+    },
+  });
+
+  const isPractice = !!existingChallengProgress;
+
+  if (isPractice) return { error: 'practice' };
+
+  if (!currentUserProgress) {
+    throw new Error('User progress not found!');
+  }
+
+  // Handle subscription
+
+  if (currentUserProgress.hearts === 0) {
+    return { error: 'hearts' };
+  }
+
+  await prisma.userProgress.update({
+    where: {
+      userId: session?.user.id,
+    },
+    data: {
+      hearts: Math.max(currentUserProgress.hearts - 1, 0),
+    },
+  });
+
+  revalidatePath(routes.SHOP);
+  revalidatePath(routes.LEARN);
+  revalidatePath(routes.QUESTS);
+  revalidatePath(routes.LEADERBOARD);
+  revalidatePath(`${routes.LESSON}/${challenge.lessonId}`);
 };

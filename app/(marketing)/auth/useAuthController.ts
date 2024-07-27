@@ -57,7 +57,7 @@ export const useAuthController = () => {
             redirect: false,
           }).then(callback => {
             if (callback?.error) {
-              toast.error('Something went wrong!');
+              toast.error('Something went wrong.');
             }
 
             if (callback?.ok && !callback?.error) {
@@ -82,7 +82,7 @@ export const useAuthController = () => {
         redirect: false,
       }).then(callback => {
         if (callback?.error) {
-          toast.error('Something went wrong!');
+          toast.error('Something went wrong.');
         }
 
         if (callback?.ok && !callback.error) {

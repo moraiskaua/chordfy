@@ -29,7 +29,9 @@ export const Quiz: React.FC<QuizProps> = ({
     options,
     status,
     selectedOption,
+    pending,
     onSelect,
+    onContinue,
   } = useQuizController(
     initialHearts,
     initialPercentage,
@@ -59,14 +61,18 @@ export const Quiz: React.FC<QuizProps> = ({
                 onSelect={onSelect}
                 status={status}
                 selectedOption={selectedOption}
-                disabled={false}
+                disabled={pending}
                 type={currentChallenge.type}
               />
             </div>
           </div>
         </div>
       </div>
-      <Footer onCheck={() => {}} status={status} disabled={!selectedOption} />
+      <Footer
+        onCheck={onContinue}
+        status={status}
+        disabled={pending || !selectedOption}
+      />
     </>
   );
 };

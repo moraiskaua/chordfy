@@ -75,14 +75,23 @@ const main = async () => {
       ],
     });
 
-    await prisma.challenge.create({
-      data: {
-        id: 'd8a772de-f7b4-4b32-9e19-e9b57c5eaec2',
-        lessonId: 'a4ee7045-37d2-4893-a014-6301daa255e0',
-        type: 'SELECT',
-        order: 0,
-        question: 'which note represents the major third of C?',
-      },
+    await prisma.challenge.createMany({
+      data: [
+        {
+          id: 'd8a772de-f7b4-4b32-9e19-e9b57c5eaec2',
+          lessonId: 'a4ee7045-37d2-4893-a014-6301daa255e0',
+          type: 'SELECT',
+          order: 0,
+          question: 'which note represents the major third of C?',
+        },
+        {
+          id: '7bd57719-549a-4e4f-a6b1-f090cbe35e7c',
+          lessonId: 'a4ee7045-37d2-4893-a014-6301daa255e0',
+          type: 'ASSIST',
+          order: 1,
+          question: 'Which note?',
+        },
+      ],
     });
 
     await prisma.challengeOption.createMany({
@@ -102,6 +111,43 @@ const main = async () => {
           text: 'F',
           correct: false,
           audio: '/piano/F.mp3',
+        },
+      ],
+    });
+
+    await prisma.challengeOption.createMany({
+      data: [
+        {
+          id: '9d4e3cc0-fa93-4a78-94b9-06644285827a',
+          challengeId: '7bd57719-549a-4e4f-a6b1-f090cbe35e7c',
+          image: '',
+          text: 'E',
+          correct: false,
+          audio: '/piano/E.mp3',
+        },
+        {
+          id: '8eed4ba5-2160-4573-94d9-aadf599701c6',
+          challengeId: '7bd57719-549a-4e4f-a6b1-f090cbe35e7c',
+          image: '',
+          text: 'F',
+          correct: false,
+          audio: '/piano/F.mp3',
+        },
+        {
+          id: 'da6d8090-c3d1-45ff-8b48-54e9248935c5',
+          challengeId: '7bd57719-549a-4e4f-a6b1-f090cbe35e7c',
+          image: '',
+          text: 'G',
+          correct: true,
+          audio: '/piano/G.mp3',
+        },
+        {
+          id: '7a02b65d-49e7-4ad4-a5eb-1095bcb742ab',
+          challengeId: '7bd57719-549a-4e4f-a6b1-f090cbe35e7c',
+          image: '',
+          text: 'A',
+          correct: false,
+          audio: '/piano/A.mp3',
         },
       ],
     });
