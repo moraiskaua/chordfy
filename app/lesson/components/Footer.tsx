@@ -34,6 +34,12 @@ export const Footer: React.FC<FooterProps> = ({
             Nicely done!
           </div>
         )}
+        {status === 'WRONG' && (
+          <div className="text-rose-500 font-bold text-base lg:text-2xl flex items-center">
+            <XCircle className="size-6 lg:size-10 mr-4" />
+            Try again.
+          </div>
+        )}
         <Button
           disabled={disabled}
           className={cn(

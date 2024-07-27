@@ -66,7 +66,7 @@ export const Quiz: React.FC<QuizProps> = ({
           </div>
         </div>
       </div>
-      <Footer onCheck={() => {}} status={'CORRECT'} />
+      <Footer onCheck={() => {}} status={'WRONG'} />
     </>
   );
 };
