@@ -49,7 +49,7 @@ export const Quiz: React.FC<QuizProps> = ({
                 options={options}
                 onSelect={() => {}}
                 status="NONE"
-                selectedOption={null}
+                selectedOption={undefined}
                 disabled={false}
                 type={currentChallenge.type}
               />
