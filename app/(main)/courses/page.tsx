@@ -6,7 +6,7 @@ interface CoursesPageProps {}
 
 const CoursesPage: React.FC<CoursesPageProps> = async ({}) => {
   const courses = await coursesService.getAll();
-  const userProgress = await userService.getUserProgress();
+  const userProgress = await userService.getProgress();
 
   return (
     <div className="h-full max-w-[912px] px-3 mx-auto">

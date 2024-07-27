@@ -84,7 +84,21 @@ export const LessonButton: React.FC<LessonButtonProps> = ({
             </CircularProgressbarWithChildren>
           </div>
         ) : (
-          <div></div>
+          <Button
+            size="rounded"
+            variant={locked ? 'locked' : 'primary'}
+            className="size-[70px] border-b-8"
+          >
+            <Icon
+              className={cn(
+                'size-10',
+                locked
+                  ? 'fill-neutral-400 text-neutral-400 stroke-neutral-400'
+                  : 'fill-primary-foreground text-primary-foreground',
+                isCompleted && 'fill-none stroke-[4]',
+              )}
+            />
+          </Button>
         )}
       </div>
     </Link>

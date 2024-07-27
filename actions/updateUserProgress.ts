@@ -27,7 +27,7 @@ export const updateUserProgress = async (courseId: string) => {
   //   throw new Error('Course is empty!');
   // }
 
-  const existingUserProgress = await userService.getUserProgress();
+  const existingUserProgress = await userService.getProgress();
 
   if (existingUserProgress) {
     await prisma.userProgress.update({

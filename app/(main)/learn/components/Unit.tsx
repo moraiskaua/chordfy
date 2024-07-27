@@ -10,15 +10,9 @@ interface UnitProps {
   lessons: {
     id: string;
     lesson: {
-      challenges: ({
+      challenges: {
         challengeProgress: ChallengeProgress[];
-      } & {
-        id: string;
-        lessonId: string;
-        question: string;
-        order: number;
-        type: ChallengeType;
-      })[];
+      };
     };
     completed: boolean;
   }[];
@@ -40,7 +34,7 @@ export const Unit: React.FC<UnitProps> = ({
       <UnitBanner title={title} description={description} />
       <div className="flex items-center flex-col relative">
         {lessons.map((lesson, index) => {
-          const isCurrent = true || lesson.id === activeLesson?.id;
+          const isCurrent = lesson.id === activeLesson?.id;
           const isLocked = !lesson.completed === !isCurrent;
 
           return (

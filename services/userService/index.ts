@@ -1,5 +1,5 @@
-import { getUserProgress } from './getUserProgress';
+import { getProgress } from './getProgress';
 
 export const userService = {
-  getUserProgress,
+  getProgress,
 };

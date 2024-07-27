@@ -4,7 +4,7 @@ import prisma from '@/database/db';
 import { getMySession } from '@/helpers/getMySession';
 
 export const getAll = cache(async () => {
-  const userProgress = await userService.getUserProgress();
+  const userProgress = await userService.getProgress();
   const session = await getMySession();
 
   if (!session?.user.id || !userProgress?.active_course_id) {

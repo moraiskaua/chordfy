@@ -11,7 +11,7 @@ import { Unit } from './components/Unit';
 interface LearnPageProps {}
 
 const LearnPage: React.FC<LearnPageProps> = async ({}) => {
-  const userProgress = await userService.getUserProgress();
+  const userProgress = await userService.getProgress();
   const units = await unitsService.getAll();
 
   if (!userProgress || !userProgress.activeCourse) {
