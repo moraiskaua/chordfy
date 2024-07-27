@@ -33,7 +33,7 @@ export const getAll = cache(async () => {
   });
 
   const normalizedData = data.map(unit => {
-    const lessonWithCompletedStatus = unit.lessons.map(lesson => {
+    const lessonsWithCompletedStatus = unit.lessons.map(lesson => {
       const allCompletedChallenges = lesson.challenges.every(challenge => {
         return (
           challenge.challengeProgress &&
@@ -42,16 +42,10 @@ export const getAll = cache(async () => {
         );
       });
 
-      return {
-        lesson,
-        completed: allCompletedChallenges,
-      };
+      return { ...lesson, completed: allCompletedChallenges };
     });
 
-    return {
-      ...unit,
-      lessons: lessonWithCompletedStatus,
-    };
+    return { ...unit, lessons: lessonsWithCompletedStatus };
   });
 
   return normalizedData;

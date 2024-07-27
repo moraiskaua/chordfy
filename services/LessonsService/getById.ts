@@ -23,6 +23,7 @@ export const getById = cache(async (id: string) => {
           order: 'asc',
         },
         include: {
+          challengeOptions: true,
           challengeProgress: {
             where: {
               userId: session?.user.id,

@@ -45,7 +45,7 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
             title={unit.title}
             description={unit.description}
             lessons={unit.lessons}
-            activeLesson={courseProgress?.activeLesson}
+            activeLesson={courseProgress.activeLesson}
             activeLessonPercentage={lessonPercentage}
           />
         ))}
