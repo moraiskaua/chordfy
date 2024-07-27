@@ -51,7 +51,7 @@ export const Card: React.FC<CardProps> = ({
         selected &&
           status === 'WRONG' &&
           'border-rose-300 bg-rose-100 hover:bg-rose-100',
-        disabled && 'pointer-events-none hover:bg-white',
+        disabled && 'pointer-events-none opacity-50',
         type === 'ASSIST' && 'lg:p-3 w-full',
       )}
       onClick={handleClick}

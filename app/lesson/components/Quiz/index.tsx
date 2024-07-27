@@ -61,7 +61,7 @@ export const Quiz: React.FC<QuizProps> = ({
                 onSelect={onSelect}
                 status={status}
                 selectedOption={selectedOption}
-                disabled={pending}
+                disabled={status !== 'NONE' || pending}
                 type={currentChallenge.type}
               />
             </div>
