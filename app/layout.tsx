@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import './globals.css';
 import AuthContext from '@/contexts/AuthContext';
+import { Toaster } from '@/components/ui/sonner';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
       <AuthContext>
+        <Toaster />
         <body className={font.className}>{children}</body>
       </AuthContext>
     </html>

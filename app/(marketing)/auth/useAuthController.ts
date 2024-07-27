@@ -4,6 +4,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 type VariantType = 'LOGIN' | 'REGISTER';
 
@@ -37,6 +38,9 @@ export const useAuthController = () => {
     setIsLoading(true);
     try {
       if (variant === 'REGISTER') {
+        if (!name || !email || !password)
+          return toast.error('Fill in all fields');
+
         if (name && email && password) {
           axios
             .post('/api/register', data)
@@ -45,23 +49,23 @@ export const useAuthController = () => {
       }
 
       if (variant === 'LOGIN') {
+        if (!email || !password) return toast.error('Fill in all fields');
+
         if (email && password) {
           signIn('credentials', {
             ...data,
             redirect: false,
           }).then(callback => {
             if (callback?.error) {
-              console.log('Invalid credentials!', callback);
+              toast.error('Something went wrong!');
             }
 
             if (callback?.ok && !callback?.error) {
-              console.log('Logged in!');
+              toast.success('Logged in!');
             }
           });
         }
       }
-
-      return console.log('Preencha todos os campos');
     } catch (e) {
       console.log('error: ', e);
     } finally {
@@ -78,11 +82,11 @@ export const useAuthController = () => {
         redirect: false,
       }).then(callback => {
         if (callback?.error) {
-          console.log('Something wen wrong!');
+          toast.error('Something went wrong!');
         }
 
         if (callback?.ok && !callback.error) {
-          console.log('Logged in!');
+          toast.success('Logged in!');
         }
       });
     } catch (e) {
