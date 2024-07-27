@@ -17,8 +17,8 @@ model User {
   updated_at    DateTime  @updatedAt
   emailVerified DateTime?
 
-  Account Account[]
-  Session Session[]
+  account Account[]
+  session Session[]
 
   @@map("users")
 }
@@ -54,16 +54,6 @@ model Session {
   @@map("sessions")
 }
 
-model Course {
-  id    String @id @default(uuid()) @db.Uuid
-  title String @db.Text
-  image String @db.Text
-
-  userProgress UserProgress[] @relation("CourseUserProgress")
-
-  @@map("courses")
-}
-
 model UserProgress {
   userId           String @id @db.Uuid
   user_name        String @default("User") @db.Text
@@ -72,7 +62,30 @@ model UserProgress {
   points           Int    @default(0)
   active_course_id String @db.Uuid
 
-  ActiveCourse Course @relation("CourseUserProgress", fields: [active_course_id], references: [id], onDelete: Cascade)
+  activeCourse Course @relation("CourseUserProgress", fields: [active_course_id], references: [id], onDelete: Cascade)
 
   @@map("users_progress")
+}
+
+model Course {
+  id    String @id @default(uuid()) @db.Uuid
+  title String @db.Text
+  image String @db.Text
+
+  userProgress UserProgress[] @relation("CourseUserProgress")
+  units        Unit[]
+
+  @@map("courses")
+}
+
+model Unit {
+  id          String @id @default(uuid()) @db.Uuid
+  courseId    String @db.Uuid
+  title       String @db.Text
+  description String @db.Text
+  order       Int
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@map("units")
 }

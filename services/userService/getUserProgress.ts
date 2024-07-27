@@ -10,7 +10,7 @@ export const getUserProgress = cache(async () => {
       userId: session?.user.id,
     },
     include: {
-      ActiveCourse: true,
+      activeCourse: true,
     },
   });
 });
