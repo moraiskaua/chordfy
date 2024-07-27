@@ -3,6 +3,7 @@ import { Nunito } from 'next/font/google';
 import './globals.css';
 import AuthContext from '@/contexts/AuthContext';
 import { Toaster } from '@/components/ui/Sonner';
+import { ExitModal } from '@/components/modals/ExitModal';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
       <AuthContext>
         <Toaster />
+        <ExitModal />
         <body className={font.className}>{children}</body>
       </AuthContext>
     </html>
