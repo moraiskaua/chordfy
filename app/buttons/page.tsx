@@ -16,7 +16,7 @@ const ButtonsPage = () => {
         <Button variant="dangerOutline">Danger Outline</Button>
       </div>
       <div className="flex gap-3">
-        <Button variant="super">Super</Button>
+        <Button variant="black">Super</Button>
         <Button variant="superOutline">Super Outline</Button>
       </div>
       <div className="flex gap-3">

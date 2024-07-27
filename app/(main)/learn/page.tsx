@@ -40,6 +40,7 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
         <Header title={userProgress.activeCourse.title} />
         {units.map(unit => (
           <Unit
+            key={unit.id}
             id={unit.id}
             order={unit.order}
             title={unit.title}

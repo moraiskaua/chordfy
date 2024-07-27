@@ -7,7 +7,9 @@ interface UnitProps {
   order: number;
   title: string;
   description: string;
-  lessons: any[];
+  lessons: (Lesson & {
+    completed: boolean;
+  })[];
   activeLesson: Lesson | undefined;
   activeLessonPercentage: number;
 }

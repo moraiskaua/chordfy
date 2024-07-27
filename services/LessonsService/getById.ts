@@ -3,12 +3,12 @@ import { cache } from 'react';
 import { coursesService } from '../coursesService';
 import prisma from '@/database/db';
 
-export const getById = cache(async (id: string) => {
+export const getById = cache(async (id?: string) => {
   const session = await getMySession();
+  const courseProgress = await coursesService.getProgress();
 
   if (!session?.user.id) return null;
 
-  const courseProgress = await coursesService.getProgress();
   const lessonId = id || courseProgress?.activeLessonId;
 
   if (!lessonId) return null;
@@ -34,7 +34,7 @@ export const getById = cache(async (id: string) => {
     },
   });
 
-  if (!data || data?.challenges) {
+  if (!data || !data?.challenges) {
     return null;
   }
 
