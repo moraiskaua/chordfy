@@ -11,13 +11,13 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-white text-black border-slate-200 border-2 border-b-4 active:border-b-2 hover:bg-secondary hover:text-slate-600',
-        primary:
+        black:
           'bg-primary text-primary-foreground border-secondary/5 hover:bg-primary/90 border-2 border-b-4 active:border-b-2',
         outline: 'bg-white text-primary hover:bg-secondary',
         danger:
           'bg-rose-700/90 text-white border-rose-700 hover:bg-rose-700/80 border-2 border-b-4 active:border-b-2',
         dangerOutline: 'bg-white text-rose-700 hover:bg-secondary',
-        super:
+        primary:
           'bg-[#8152AB] text-white border-[#C47BFD] hover:bg-[#8152AB]/90 border-2 border-b-4 active:border-b-2',
         superOutline: 'bg-white text-[#8152AB] hover:bg-secondary',
         ghost:
@@ -26,6 +26,8 @@ const buttonVariants = cva(
           'bg-transparent border-transparent hover:bg-primary/5 transition-none',
         sidebarActive:
           'bg-primary/15 border-2 border-primary/15 hover:bg-primary/20 transition-none',
+        locked:
+          'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0',
       },
       size: {
         default: 'h-11 px-4 py-2',

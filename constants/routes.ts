@@ -5,4 +5,5 @@ export const routes = {
   QUESTS: '/quests',
   SHOP: '/shop',
   COURSES: '/courses',
+  LESSON: '/lesson',
 };

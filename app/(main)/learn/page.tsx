@@ -6,14 +6,13 @@ import { userService } from '@/services/userService';
 import { redirect } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { unitsService } from '@/services/unitsService';
+import { Unit } from './components/Unit';
 
 interface LearnPageProps {}
 
 const LearnPage: React.FC<LearnPageProps> = async ({}) => {
   const userProgress = await userService.getUserProgress();
   const units = await unitsService.getAll();
-
-  console.log(units);
 
   if (!userProgress || !userProgress.activeCourse) {
     redirect(routes.COURSES);
@@ -31,9 +30,17 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
       </StickyWrapper>
       <FeedWrapper>
         <Header title={userProgress.activeCourse.title} />
-        <div className="space-y-4">
-          <div />
-        </div>
+        {units.map(unit => (
+          <Unit
+            id={unit.id}
+            order={unit.order}
+            title={unit.title}
+            description={unit.description}
+            lessons={unit.lessons}
+            activeLesson={null}
+            activeLessonPercentage={0}
+          />
+        ))}
       </FeedWrapper>
     </div>
   );

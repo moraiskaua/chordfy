@@ -32,27 +32,29 @@ export const getAll = cache(async () => {
     },
   });
 
-  const normalizedData = data.map(unit => {
-    const lessonWithCompletedStatus = unit.lessons.map(lesson => {
-      const allCompletedChallenges = lesson.challenges.every(challenge => {
-        return (
-          challenge.challengeProgress &&
-          challenge.challengeProgress.length > 0 &&
-          challenge.challengeProgress.every(progress => progress.completed)
-        );
-      });
+  return data;
 
-      return {
-        lesson,
-        completed: allCompletedChallenges,
-      };
-    });
+  // const normalizedData = data.map(unit => {
+  //   const lessonWithCompletedStatus = unit.lessons.map(lesson => {
+  //     const allCompletedChallenges = lesson.challenges.every(challenge => {
+  //       return (
+  //         challenge.challengeProgress &&
+  //         challenge.challengeProgress.length > 0 &&
+  //         challenge.challengeProgress.every(progress => progress.completed)
+  //       );
+  //     });
 
-    return {
-      ...unit,
-      lessons: lessonWithCompletedStatus,
-    };
-  });
+  //     return {
+  //       lesson,
+  //       completed: allCompletedChallenges,
+  //     };
+  //   });
 
-  return normalizedData;
+  //   return {
+  //     ...unit,
+  //     lessons: lessonWithCompletedStatus,
+  //   };
+  // });
+
+  // return normalizedData;
 });
