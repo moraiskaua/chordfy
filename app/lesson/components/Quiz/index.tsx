@@ -1,17 +1,15 @@
 'use client';
 
-import { Challenge, ChallengeOption } from '@prisma/client';
+import { Challenge } from '../Challenge';
 import { Header } from '../Header';
-import { useQuizController } from './useQuizController';
+import { QuestionBubble } from '../QuestionBubble';
+import { LessonChallengeType, useQuizController } from './useQuizController';
 
 interface QuizProps {
   initialPercentage: number;
   initialHearts: number;
   initialLessonId: string;
-  initialLessonChallenges: (Challenge & {
-    completed: boolean;
-    challengeOptions: ChallengeOption[];
-  })[];
+  initialLessonChallenges: LessonChallengeType[];
   userSubscription: any;
 }
 
@@ -22,10 +20,12 @@ export const Quiz: React.FC<QuizProps> = ({
   initialLessonChallenges,
   userSubscription,
 }) => {
-  const { hearts, percentage } = useQuizController(
-    initialHearts,
-    initialPercentage,
-  );
+  const { hearts, percentage, title, challenges, currentChallenge, options } =
+    useQuizController(
+      initialHearts,
+      initialPercentage,
+      initialLessonChallenges,
+    );
 
   return (
     <>
@@ -34,6 +34,29 @@ export const Quiz: React.FC<QuizProps> = ({
         percentage={percentage}
         hasActiveSubscription={userSubscription}
       />
+      <div className="flex-1">
+        <div className="h-full flex items-center justify-center">
+          <div className="lg:min-h-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
+            <h1 className="text-lg lg:text-3xl text-center font-bold text-neutral-700">
+              {title}
+            </h1>
+            <div>
+              {currentChallenge.type === 'ASSIST' && (
+                <QuestionBubble question={currentChallenge.question} />
+              )}
+
+              <Challenge
+                options={options}
+                onSelect={() => {}}
+                status="NONE"
+                selectedOption={null}
+                disabled={false}
+                type={currentChallenge.type}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
