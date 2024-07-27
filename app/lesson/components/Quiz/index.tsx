@@ -34,7 +34,6 @@ export const Quiz: React.FC<QuizProps> = ({
         percentage={percentage}
         hasActiveSubscription={userSubscription}
       />
-      aaa
     </>
   );
 };
