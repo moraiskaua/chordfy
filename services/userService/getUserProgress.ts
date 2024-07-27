@@ -1,10 +1,9 @@
-import { getServerSession } from 'next-auth';
 import prisma from '@/database/db';
 import { cache } from 'react';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getMySession } from '@/helpers/getMySession';
 
 export const getUserProgress = cache(async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getMySession();
 
   return prisma.userProgress.findFirst({
     where: {

@@ -6,6 +6,7 @@ import { Input } from '@/components/Input';
 import { FaGoogle } from 'react-icons/fa';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import { routes } from '@/constants/routes';
 
 interface AuthPageProps {}
 
@@ -23,7 +24,7 @@ const AuthPage: React.FC<AuthPageProps> = ({}) => {
   } = useAuthController();
 
   if (session.status === 'authenticated') {
-    return redirect('/learn');
+    return redirect(routes.LEARN);
   }
 
   return (

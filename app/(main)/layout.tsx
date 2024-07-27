@@ -1,7 +1,7 @@
 import { MobileHeader } from '@/components/MobileHeader';
 import { Sidebar } from '@/components/Sidebar';
 import { routes } from '@/constants/routes';
-import { getServerSession } from 'next-auth';
+import { getMySession } from '@/helpers/getMySession';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
@@ -10,7 +10,7 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = async ({ children }) => {
-  const session = await getServerSession();
+  const session = await getMySession();
 
   if (!session) {
     redirect(routes.AUTH);

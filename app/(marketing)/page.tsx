@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/Button';
 import { routes } from '@/constants/routes';
-import { getServerSession } from 'next-auth';
+import { getMySession } from '@/helpers/getMySession';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const Home = async () => {
-  const session = await getServerSession();
+  const session = await getMySession();
 
   return (
     <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-row items-center justify-center p-4 gap-2">

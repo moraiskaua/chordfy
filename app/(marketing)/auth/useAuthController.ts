@@ -1,3 +1,4 @@
+import { routes } from '@/constants/routes';
 import axios from 'axios';
 import { signIn, useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
@@ -73,7 +74,7 @@ export const useAuthController = () => {
 
     try {
       signIn(action, {
-        callbackUrl: '/learn',
+        callbackUrl: routes.LEARN,
         redirect: false,
       }).then(callback => {
         if (callback?.error) {

@@ -1,7 +1,6 @@
 import { Footer } from '@/app/(marketing)/components/Footer';
 import { Header } from '@/app/(marketing)/components/Header';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
+import { getMySession } from '@/helpers/getMySession';
 import { ReactNode } from 'react';
 
 interface MarketingLayoutProps {
@@ -11,7 +10,7 @@ interface MarketingLayoutProps {
 const MarketingLayout: React.FC<MarketingLayoutProps> = async ({
   children,
 }) => {
-  const session = await getServerSession();
+  const session = await getMySession();
 
   return (
     <div className="min-h-screen flex flex-col">

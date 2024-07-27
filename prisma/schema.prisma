@@ -65,13 +65,12 @@ model Course {
 }
 
 model UserProgress {
-  id               String @id @default(uuid()) @db.Uuid
-  userId           String @db.Uuid
-  user_name        String @db.Text
-  user_image       String @default("/mascot.svg") @db.Text
-  active_course_id String @db.Uuid
+  userId           String @id @db.Uuid
+  user_name        String @default("User") @db.Text
+  user_image       String @default("") @db.Text
   hearts           Int    @default(5)
   points           Int    @default(0)
+  active_course_id String @db.Uuid
 
   ActiveCourse Course @relation("CourseUserProgress", fields: [active_course_id], references: [id], onDelete: Cascade)
 
