@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       <div className="text-rose-500 flex items-center font-bold">
         <Image
-          src="/heart.svg"
+          src="/icons/heart.svg"
           height={28}
           width={28}
           alt="Hearts"

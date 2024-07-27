@@ -17,12 +17,12 @@ const main = async () => {
         {
           id: '0c8a85d7-7480-4bbf-a1f4-3dfcbfb942c1',
           title: 'Intervals',
-          image: '/piano.svg',
+          image: '/icons/piano.svg',
         },
         {
           id: '4ee7f732-95f5-449e-add5-b4041122d68c',
           title: 'Chord Quality',
-          image: '/piano.svg',
+          image: '/icons/piano.svg',
         },
       ],
     });
@@ -99,7 +99,7 @@ const main = async () => {
         {
           id: 'e8ec4528-c3e9-40a1-8af4-6a70c5ed2fa8',
           challengeId: 'd8a772de-f7b4-4b32-9e19-e9b57c5eaec2',
-          image: '/E.svg',
+          image: '/images/E.svg',
           text: 'E',
           correct: true,
           audio: '/piano/E.mp3',
@@ -107,7 +107,7 @@ const main = async () => {
         {
           id: '89f56536-7fa4-42d8-95b0-6de9e644440d',
           challengeId: 'd8a772de-f7b4-4b32-9e19-e9b57c5eaec2',
-          image: '/F.svg',
+          image: '/images/F.svg',
           text: 'F',
           correct: false,
           audio: '/piano/F.mp3',

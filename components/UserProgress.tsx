@@ -34,7 +34,7 @@ export const UserProgress: React.FC<UserProgressProps> = ({
       <Link href={routes.SHOP}>
         <Button variant="ghost" className="text-orange-500">
           <Image
-            src="/points.svg"
+            src="/icons/points.svg"
             alt="Points"
             width={28}
             height={28}
@@ -46,7 +46,7 @@ export const UserProgress: React.FC<UserProgressProps> = ({
       <Link href={routes.SHOP}>
         <Button variant="ghost" className="text-rose-500">
           <Image
-            src="/heart.svg"
+            src="/icons/heart.svg"
             alt="Points"
             width={22}
             height={22}
