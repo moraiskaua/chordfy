@@ -18,7 +18,6 @@ export const getProgress = cache(async () => {
     orderBy: {
       order: 'asc',
     },
-
     include: {
       lessons: {
         orderBy: {
@@ -45,7 +44,10 @@ export const getProgress = cache(async () => {
       lesson.challenges.some(
         challenge =>
           !challenge.challengeProgress ||
-          challenge.challengeProgress.length > 0,
+          challenge.challengeProgress.length > 0 ||
+          challenge.challengeProgress.some(
+            progress => progress.completed === false,
+          ),
       ),
     );
 
