@@ -7,14 +7,22 @@ import { redirect } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { unitsService } from '@/services/unitsService';
 import { Unit } from './components/Unit';
+import { lessonsService } from '@/services/LessonsService';
+import { coursesService } from '@/services/coursesService';
 
 interface LearnPageProps {}
 
 const LearnPage: React.FC<LearnPageProps> = async ({}) => {
   const userProgress = await userService.getProgress();
   const units = await unitsService.getAll();
+  const lessonPercentage = await lessonsService.getPercentage();
+  const courseProgress = await coursesService.getProgress();
 
   if (!userProgress || !userProgress.activeCourse) {
+    redirect(routes.COURSES);
+  }
+
+  if (!courseProgress) {
     redirect(routes.COURSES);
   }
 
@@ -37,8 +45,8 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
             title={unit.title}
             description={unit.description}
             lessons={unit.lessons}
-            activeLesson={null}
-            activeLessonPercentage={0}
+            activeLesson={courseProgress?.activeLesson}
+            activeLessonPercentage={lessonPercentage}
           />
         ))}
       </FeedWrapper>

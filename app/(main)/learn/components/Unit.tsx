@@ -1,4 +1,4 @@
-import { ChallengeProgress, ChallengeType, Lesson } from '@prisma/client';
+import { ChallengeType, Lesson } from '@prisma/client';
 import { UnitBanner } from './UnitBanner';
 import { LessonButton } from './LessonButton';
 
@@ -7,16 +7,8 @@ interface UnitProps {
   order: number;
   title: string;
   description: string;
-  lessons: {
-    id: string;
-    lesson: {
-      challenges: {
-        challengeProgress: ChallengeProgress[];
-      };
-    };
-    completed: boolean;
-  }[];
-  activeLesson: Lesson | null;
+  lessons: any[];
+  activeLesson: Lesson | undefined;
   activeLessonPercentage: number;
 }
 

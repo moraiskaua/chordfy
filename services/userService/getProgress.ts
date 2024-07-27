@@ -5,12 +5,16 @@ import { getMySession } from '@/helpers/getMySession';
 export const getProgress = cache(async () => {
   const session = await getMySession();
 
-  return prisma.userProgress.findFirst({
+  return await prisma.userProgress.findFirst({
     where: {
       userId: session?.user.id,
     },
     include: {
-      activeCourse: true,
+      activeCourse: {
+        include: {
+          userProgress: true,
+        },
+      },
     },
   });
 });

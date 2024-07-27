@@ -7,7 +7,7 @@ export const getProgress = cache(async () => {
   const session = await getMySession();
   const userProgress = await userService.getProgress();
 
-  if (session?.user.id || !userProgress?.activeCourse) {
+  if (!session?.user.id || !userProgress?.activeCourse) {
     return null;
   }
 
@@ -44,7 +44,7 @@ export const getProgress = cache(async () => {
       lesson.challenges.some(
         challenge =>
           !challenge.challengeProgress ||
-          challenge.challengeProgress.length > 0 ||
+          challenge.challengeProgress.length === 0 ||
           challenge.challengeProgress.some(
             progress => progress.completed === false,
           ),
