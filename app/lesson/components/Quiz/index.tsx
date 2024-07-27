@@ -30,6 +30,8 @@ export const Quiz: React.FC<QuizProps> = ({
     status,
     selectedOption,
     pending,
+    correctAudio,
+    incorrectAudio,
     onSelect,
     onContinue,
   } = useQuizController(
@@ -40,6 +42,8 @@ export const Quiz: React.FC<QuizProps> = ({
 
   return (
     <>
+      {correctAudio}
+      {incorrectAudio}
       <Header
         hearts={hearts}
         percentage={percentage}

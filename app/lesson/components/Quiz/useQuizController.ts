@@ -2,6 +2,7 @@ import { updateChallengeProgress } from '@/actions/updateChallengeProgress';
 import { reduceHearts } from '@/actions/updateUserProgress';
 import { Challenge, ChallengeOption, ChallengeType } from '@prisma/client';
 import { useState, useTransition } from 'react';
+import { useAudio } from 'react-use';
 import { toast } from 'sonner';
 
 export interface LessonChallengeType {
@@ -31,6 +32,13 @@ export const useQuizController = (
     );
 
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
+  });
+
+  const [correctAudio, _c, correctAudioControls] = useAudio({
+    src: '/effects/correct.mp3',
+  });
+  const [incorrectAudio, _i, incorrectAudioControls] = useAudio({
+    src: '/effects/incorrect.mp3',
   });
 
   const currentChallenge = challenges[activeIndex];
@@ -71,6 +79,7 @@ export const useQuizController = (
               return console.log('Missing hearts!');
             }
 
+            correctAudioControls.play();
             setStatus('CORRECT');
             setPercentage(prev => prev + 100 / challenges.length);
 
@@ -88,6 +97,7 @@ export const useQuizController = (
               return console.log('Missing hearts!');
             }
 
+            incorrectAudioControls.play();
             setStatus('WRONG');
 
             if (!response?.error) {
@@ -113,6 +123,8 @@ export const useQuizController = (
     options,
     status,
     pending,
+    correctAudio,
+    incorrectAudio,
     onSelect,
     onContinue,
   };
