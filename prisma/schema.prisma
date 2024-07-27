@@ -17,8 +17,8 @@ model User {
   updated_at    DateTime  @updatedAt
   emailVerified DateTime?
 
-  account Account[]
-  session Session[]
+  accounts Account[]
+  sessions Session[]
 
   @@map("users")
 }
@@ -85,8 +85,8 @@ model Unit {
   description String @db.Text
   order       Int    @db.Integer
 
-  course Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  lesson Lesson[]
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
 
   @@map("units")
 }
@@ -97,8 +97,8 @@ model Lesson {
   title  String @db.Text
   order  Int    @db.Integer
 
-  unit      Unit        @relation(fields: [unitId], references: [id], onDelete: Cascade)
-  challenge Challenge[]
+  unit       Unit        @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  challenges Challenge[]
 
   @@map("lessons")
 }
@@ -111,7 +111,7 @@ model Challenge {
   type     ChallengeType
 
   lesson            Lesson              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  challengeOption   ChallengeOption[]
+  challengeOptions  ChallengeOption[]
   challengeProgress ChallengeProgress[]
 
   @@map("challenges")
