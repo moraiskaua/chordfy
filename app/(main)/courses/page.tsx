@@ -1,4 +1,4 @@
-import { coursesService } from '@/services/courses';
+import { coursesService } from '@/services/coursesService';
 import { List } from './components/List';
 import { userService } from '@/services/userService';
 

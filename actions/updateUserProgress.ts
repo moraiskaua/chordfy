@@ -1,6 +1,6 @@
 'use server';
 
-import { coursesService } from '@/services/courses';
+import { coursesService } from '@/services/coursesService';
 import { userService } from '@/services/userService';
 import prisma from '@/database/db';
 import { revalidatePath } from 'next/cache';

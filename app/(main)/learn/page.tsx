@@ -5,11 +5,15 @@ import { UserProgress } from '@/components/UserProgress';
 import { userService } from '@/services/userService';
 import { redirect } from 'next/navigation';
 import { routes } from '@/constants/routes';
+import { unitsService } from '@/services/unitsService';
 
 interface LearnPageProps {}
 
 const LearnPage: React.FC<LearnPageProps> = async ({}) => {
   const userProgress = await userService.getUserProgress();
+  const units = await unitsService.getAll();
+
+  console.log(units);
 
   if (!userProgress || !userProgress.activeCourse) {
     redirect(routes.COURSES);
