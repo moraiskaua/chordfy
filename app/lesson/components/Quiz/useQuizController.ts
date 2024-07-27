@@ -1,4 +1,5 @@
 import { updateChallengeProgress } from '@/actions/updateChallengeProgress';
+import { reduceHearts } from '@/actions/updateUserProgress';
 import { Challenge, ChallengeOption, ChallengeType } from '@prisma/client';
 import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
@@ -67,8 +68,7 @@ export const useQuizController = (
         updateChallengeProgress(currentChallenge.id)
           .then(response => {
             if (response?.error === 'hearts') {
-              console.log('Missing hearts!');
-              return;
+              return console.log('Missing hearts!');
             }
 
             setStatus('CORRECT');
@@ -81,7 +81,21 @@ export const useQuizController = (
           .catch(() => toast.error('Something went wrong.'));
       });
     } else {
-      console.log('incorrect option');
+      startTransition(() => {
+        reduceHearts(currentChallenge.id)
+          .then(response => {
+            if (response?.error === 'hearts') {
+              return console.log('Missing hearts!');
+            }
+
+            setStatus('WRONG');
+
+            if (!response?.error) {
+              setHearts(prev => Math.max(prev - 1, 0));
+            }
+          })
+          .catch(() => toast.error('Something went wrong.'));
+      });
     }
   };
 

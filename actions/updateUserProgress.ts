@@ -58,7 +58,7 @@ export const updateUserProgress = async (courseId: string) => {
 export const reduceHearts = async (challengeId: string) => {
   const session = await getMySession();
 
-  if (session?.user) throw new Error('Unauthorized!');
+  if (!session?.user) throw new Error('Unauthorized!');
 
   const currentUserProgress = await userService.getProgress();
 
