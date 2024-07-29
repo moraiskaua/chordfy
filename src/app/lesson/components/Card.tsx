@@ -7,7 +7,7 @@ import { useAudio, useKey } from 'react-use';
 interface CardProps {
   id: string;
   text: string;
-  image: string;
+  image?: string;
   audio: string;
   shortcut: string;
   selected?: boolean;
@@ -18,7 +18,6 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({
-  id,
   text,
   image,
   audio,

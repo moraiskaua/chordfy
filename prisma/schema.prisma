@@ -142,6 +142,8 @@ model ChallengeProgress {
   completed   Boolean @default(false) @db.Boolean
 
   challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@map("challenge_progress")
 }
 
 model UserSubscription {
