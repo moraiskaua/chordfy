@@ -10,6 +10,7 @@ import { Unit } from './components/Unit';
 import { lessonsService } from '@/src/services/LessonsService';
 import { coursesService } from '@/src/services/coursesService';
 import { Promo } from '@/src/components/Promo';
+import { Quests } from '@/src/components/Quests';
 
 interface LearnPageProps {}
 
@@ -34,6 +35,7 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
           hasActiveSubscription={!!userSubscription?.isActive}
         />
         {!!!userSubscription?.isActive && <Promo />}
+        <Quests points={userProgress.points} />
       </StickyWrapper>
       <FeedWrapper>
         <Header title={userProgress.activeCourse.title} />

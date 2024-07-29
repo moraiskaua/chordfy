@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { routes } from '@/src/constants/routes';
 import { getMySession } from '@/src/helpers/getMySession';
-import { POINTS_TO_REFIL } from '@/src/constants/hearts';
+import { POINTS_TO_REFIL } from '@/src/constants';
 
 export const updateUserProgress = async (courseId: string) => {
   const session = await getMySession();

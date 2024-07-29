@@ -1,6 +1,6 @@
 import { refilHearts } from '@/src/actions/updateUserProgress';
 import { createStripeUrl } from '@/src/actions/userSubscription';
-import { POINTS_TO_REFIL } from '@/src/constants/hearts';
+import { POINTS_TO_REFIL } from '@/src/constants';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 

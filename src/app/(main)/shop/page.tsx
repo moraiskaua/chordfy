@@ -6,6 +6,8 @@ import { userService } from '@/src/services/userService';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { Items } from './components/Items';
+import { Quests } from '@/src/components/Quests';
+import { Promo } from '@/src/components/Promo';
 
 interface ShopPageProps {}
 
@@ -24,6 +26,8 @@ const ShopPage: React.FC<ShopPageProps> = async ({}) => {
           points={userProgress.points}
           hasActiveSubscription={!!userSubscription?.isActive}
         />
+        {!!!userSubscription?.isActive && <Promo />}
+        <Quests points={userProgress.points} />
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">

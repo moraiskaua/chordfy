@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Separator } from '@/src/components/ui/Separator';
 import Avatar from '@/src/components/Avatar';
 import { Promo } from '@/src/components/Promo';
+import { Quests } from '@/src/components/Quests';
 
 interface LeaderboardPageProps {}
 
@@ -28,6 +29,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = async ({}) => {
           hasActiveSubscription={!!userSubscription?.isActive}
         />
         {!!!userSubscription?.isActive && <Promo />}
+        <Quests points={userProgress.points} />
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">
