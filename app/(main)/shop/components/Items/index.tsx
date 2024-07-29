@@ -7,18 +7,16 @@ import { useItemsController } from './useItemsController';
 interface ItemsProps {
   hearts: number;
   points: number;
-  hasActiveSubscriptions: boolean;
+  hasActiveSubscription: boolean;
 }
 
 export const Items: React.FC<ItemsProps> = ({
   hearts,
   points,
-  hasActiveSubscriptions,
+  hasActiveSubscription,
 }) => {
-  const { pending, POINTS_TO_REFIL, handleRefilHearts } = useItemsController(
-    hearts,
-    points,
-  );
+  const { pending, POINTS_TO_REFIL, handleRefilHearts, handleUpgrade } =
+    useItemsController(hearts, points);
 
   return (
     <ul className="w-full">
@@ -46,6 +44,25 @@ export const Items: React.FC<ItemsProps> = ({
               <p>{POINTS_TO_REFIL}</p>
             </div>
           )}
+        </Button>
+      </div>
+      <div className="flex items-center w-full p-4 pt-8 gap-x-4 border-t-2">
+        <Image
+          src="/icons/unlimited.svg"
+          alt="Unlimited Hearts"
+          height={60}
+          width={60}
+        />
+        <div className="flex-1">
+          <p className="text-neutral-700 text-base lg:text-xl font-bold">
+            Unlimited hearts
+          </p>
+        </div>
+        <Button
+          disabled={pending || hasActiveSubscription}
+          onClick={handleUpgrade}
+        >
+          {hasActiveSubscription ? 'Active' : 'Upgrade'}
         </Button>
       </div>
     </ul>

@@ -4,7 +4,7 @@ import { routes } from '@/constants/routes';
 import { useLessonButtonController } from './useLessonButtonController';
 import { Check, Crown, Star } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';

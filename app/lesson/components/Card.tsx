@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { ChallengeType } from '@prisma/client';
 import Image from 'next/image';
 import { useCallback } from 'react';

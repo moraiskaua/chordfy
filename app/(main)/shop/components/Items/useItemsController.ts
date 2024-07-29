@@ -1,4 +1,5 @@
 import { refilHearts } from '@/actions/updateUserProgress';
+import { createStripeUrl } from '@/actions/userSubscription';
 import { POINTS_TO_REFIL } from '@/constants/hearts';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
@@ -14,5 +15,17 @@ export const useItemsController = (hearts: number, points: number) => {
     });
   };
 
-  return { pending, POINTS_TO_REFIL, handleRefilHearts };
+  const handleUpgrade = () => {
+    startTransition(() => {
+      createStripeUrl()
+        .then(response => {
+          if (response.data) {
+            window.location.href = response.data;
+          }
+        })
+        .catch(() => toast.error('Something went wrong.'));
+    });
+  };
+
+  return { pending, POINTS_TO_REFIL, handleRefilHearts, handleUpgrade };
 };

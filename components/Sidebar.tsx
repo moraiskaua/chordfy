@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { HeroAvatar } from './HeroAvatar';
 import Link from 'next/link';
 import { routes } from '@/constants/routes';

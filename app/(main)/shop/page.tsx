@@ -11,6 +11,7 @@ interface ShopPageProps {}
 
 const ShopPage: React.FC<ShopPageProps> = async ({}) => {
   const userProgress = await userService.getProgress();
+  const userSubscription = await userService.getSubscription();
 
   if (!userProgress) redirect(routes.COURSES);
 
@@ -21,7 +22,7 @@ const ShopPage: React.FC<ShopPageProps> = async ({}) => {
           activeCourse={userProgress.activeCourse}
           hearts={userProgress.hearts}
           points={userProgress.points}
-          hasActiveSubscriptions={false}
+          hasActiveSubscription={!!userSubscription?.isActive}
         />
       </StickyWrapper>
       <FeedWrapper>
@@ -36,7 +37,7 @@ const ShopPage: React.FC<ShopPageProps> = async ({}) => {
           <Items
             hearts={userProgress.hearts}
             points={userProgress.points}
-            hasActiveSubscriptions={false}
+            hasActiveSubscription={!!userSubscription?.isActive}
           />
         </div>
       </FeedWrapper>

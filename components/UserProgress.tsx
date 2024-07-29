@@ -9,14 +9,14 @@ interface UserProgressProps {
   activeCourse: Course;
   hearts: number;
   points: number;
-  hasActiveSubscriptions: boolean;
+  hasActiveSubscription: boolean;
 }
 
 export const UserProgress: React.FC<UserProgressProps> = ({
   activeCourse,
   hearts,
   points,
-  hasActiveSubscriptions,
+  hasActiveSubscription,
 }) => {
   return (
     <div className="flex items-center justify-between gap-x-2 w-full">
@@ -52,7 +52,7 @@ export const UserProgress: React.FC<UserProgressProps> = ({
             height={22}
             className="mr-2"
           />
-          {hasActiveSubscriptions ? (
+          {hasActiveSubscription ? (
             <InfinityIcon className="size-4 stroke-[3]" />
           ) : (
             hearts

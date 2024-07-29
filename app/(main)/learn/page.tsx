@@ -17,6 +17,7 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
   const units = await unitsService.getAll();
   const lessonPercentage = await lessonsService.getPercentage();
   const courseProgress = await coursesService.getProgress();
+  const userSubscription = await userService.getSubscription();
 
   if (!userProgress || !userProgress.activeCourse || !courseProgress) {
     redirect(routes.COURSES);
@@ -29,7 +30,7 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
           activeCourse={userProgress.activeCourse}
           hearts={userProgress.hearts}
           points={userProgress.points}
-          hasActiveSubscriptions={false}
+          hasActiveSubscription={!!userSubscription?.isActive}
         />
       </StickyWrapper>
       <FeedWrapper>

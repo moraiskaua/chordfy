@@ -1,6 +1,6 @@
 import { useKey, useMedia } from 'react-use';
 import { CheckCircle, XCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { Button } from '@/components/ui/Button';
 import { routes } from '@/constants/routes';
 
