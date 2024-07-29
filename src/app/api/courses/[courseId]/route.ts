@@ -38,7 +38,10 @@ export const PUT = async (
   return NextResponse.json(data);
 };
 
-export const DELETE = async ({ params }: { params: { courseId: string } }) => {
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { courseId: string } },
+) => {
   const isAdmin = await getIsAdmin();
   if (!isAdmin) return new NextResponse('Unauthorized!', { status: 401 });
 
