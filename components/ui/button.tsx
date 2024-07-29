@@ -25,7 +25,7 @@ const buttonVariants = cva(
         sidebar:
           'bg-transparent border-transparent hover:bg-primary/5 transition-none',
         sidebarActive:
-          'bg-primary/15 border-2 border-primary/15 hover:bg-primary/20 transition-none',
+          'border-2 border-[#8152AB]/25 bg-[#C47BFD]/25 hover:bg-[#C47BFD]/25',
         locked:
           'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0',
       },
