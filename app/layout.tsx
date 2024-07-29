@@ -4,6 +4,7 @@ import './globals.css';
 import AuthContext from '@/contexts/AuthContext';
 import { Toaster } from '@/components/ui/Sonner';
 import { ExitModal } from '@/components/modals/ExitModal';
+import { HeartsModal } from '@/components/modals/HeartsModal';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <AuthContext>
         <Toaster />
         <ExitModal />
+        <HeartsModal />
         <body className={font.className}>{children}</body>
       </AuthContext>
     </html>

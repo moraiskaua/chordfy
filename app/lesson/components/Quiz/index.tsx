@@ -49,7 +49,6 @@ export const Quiz: React.FC<QuizProps> = ({
     initialLessonChallenges,
     initialLessonId,
   );
-
   const { width, height } = useWindowSize();
 
   if (!currentChallenge)

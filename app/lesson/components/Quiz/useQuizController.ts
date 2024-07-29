@@ -1,5 +1,6 @@
 import { updateChallengeProgress } from '@/actions/updateChallengeProgress';
 import { reduceHearts } from '@/actions/updateUserProgress';
+import { useHeartsModal } from '@/stores/useHeartsModal';
 import { Challenge, ChallengeOption, ChallengeType } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
@@ -49,6 +50,7 @@ export const useQuizController = (
     autoPlay: true,
   });
 
+  const { open: openHeartsModal } = useHeartsModal();
   const currentChallenge = challenges[activeIndex];
   const options = currentChallenge?.challengeOptions ?? [];
   const onNext = () => setActiveIndex(current => current + 1);
@@ -84,7 +86,7 @@ export const useQuizController = (
         updateChallengeProgress(currentChallenge.id)
           .then(response => {
             if (response?.error === 'hearts') {
-              return console.log('Missing hearts!');
+              return openHeartsModal();
             }
 
             correctAudioControls.play();
@@ -102,7 +104,7 @@ export const useQuizController = (
         reduceHearts(currentChallenge.id)
           .then(response => {
             if (response?.error === 'hearts') {
-              return console.log('Missing hearts!');
+              return openHeartsModal();
             }
 
             incorrectAudioControls.play();

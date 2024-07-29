@@ -14,12 +14,12 @@ export const Header: React.FC<HeaderProps> = ({
   percentage,
   hasActiveSubscription,
 }) => {
-  const { open } = useExitModal();
+  const { open: openExitModal } = useExitModal();
 
   return (
     <header className="lg:pt-[50px] pt-[20px] px-10 flex gap-x-7 items-center justify-between max-w-[1140px] mx-auto w-full">
       <X
-        onClick={open}
+        onClick={openExitModal}
         className="text-slate-500 hover:opacity-50 transition cursor-pointer"
       />
       <Progress value={percentage} />
