@@ -7,7 +7,6 @@ import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import { Separator } from '@/src/components/ui/Separator';
 import Avatar from '@/src/components/Avatar';
-import { User } from '@prisma/client';
 
 interface LeaderboardPageProps {}
 

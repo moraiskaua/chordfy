@@ -11,6 +11,7 @@ const main = async () => {
     await prisma.challenge.deleteMany();
     await prisma.challengeOption.deleteMany();
     await prisma.challengeProgress.deleteMany();
+    await prisma.userSubscription.deleteMany();
 
     await prisma.course.createMany({
       data: [
