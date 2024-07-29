@@ -13,6 +13,7 @@ interface LessonIdPageProps {
 const LessonIdPage: React.FC<LessonIdPageProps> = async ({ params }) => {
   const lesson = await lessonsService.getById(params.lessonId);
   const userProgress = await userService.getProgress();
+  const userSubscription = await userService.getSubscription();
 
   if (!lesson || !userProgress) {
     redirect(routes.LEARN);
@@ -29,7 +30,7 @@ const LessonIdPage: React.FC<LessonIdPageProps> = async ({ params }) => {
       initialLessonChallenges={lesson.challenges}
       initialPercentage={initialPercentage}
       initialHearts={userProgress.hearts}
-      userSubscription={null}
+      userSubscription={userSubscription}
     />
   );
 };

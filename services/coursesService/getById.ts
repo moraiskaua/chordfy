@@ -6,7 +6,19 @@ export const getById = cache(async (courseId: string) => {
     where: {
       id: courseId,
     },
-
-    // include lessions later.
+    include: {
+      units: {
+        include: {
+          lessons: {
+            orderBy: {
+              order: 'asc',
+            },
+          },
+        },
+        orderBy: {
+          order: 'asc',
+        },
+      },
+    },
   });
 });

@@ -19,10 +19,9 @@ export const updateUserProgress = async (courseId: string) => {
 
   if (!course) throw new Error('Course not found!');
 
-  // Continue when lessions is added.
-  // if (!course.units.length || !course.units[0].length) {
-  //   throw new Error('Course is empty!');
-  // }
+  if (!course.units.length || !course.units[0].lessons.length) {
+    throw new Error('Course is empty!');
+  }
 
   const existingUserProgress = await userService.getProgress();
 
@@ -63,6 +62,7 @@ export const reduceHearts = async (challengeId: string) => {
   if (!session?.user) throw new Error('Unauthorized!');
 
   const currentUserProgress = await userService.getProgress();
+  const userSubscription = await userService.getSubscription();
 
   const challenge = await prisma.challenge.findFirst({
     where: {
@@ -93,11 +93,9 @@ export const reduceHearts = async (challengeId: string) => {
     throw new Error('User progress not found!');
   }
 
-  // Handle subscription
+  if (userSubscription?.isActive) return { error: 'subscription' };
 
-  if (currentUserProgress.hearts === 0) {
-    return { error: 'hearts' };
-  }
+  if (currentUserProgress.hearts === 0) return { error: 'hearts' };
 
   await prisma.userProgress.update({
     where: {

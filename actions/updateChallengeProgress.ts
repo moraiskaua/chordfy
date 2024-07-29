@@ -14,6 +14,7 @@ export const updateChallengeProgress = async (challengeId: string) => {
   }
 
   const currentUserProgress = await userService.getProgress();
+  const userSubscription = await userService.getSubscription();
 
   if (!currentUserProgress) {
     throw new Error('User progress not found!');
@@ -37,8 +38,11 @@ export const updateChallengeProgress = async (challengeId: string) => {
 
   const isPractice = !!existingChallengeProgress;
 
-  // Not if user has a subscription.
-  if (currentUserProgress.hearts === 0 && !isPractice) {
+  if (
+    currentUserProgress.hearts === 0 &&
+    !isPractice &&
+    !userSubscription?.isActive
+  ) {
     return { error: 'hearts' };
   }
 

@@ -15,6 +15,9 @@ export const getAll = cache(async () => {
     where: {
       courseId: userProgress.active_course_id,
     },
+    orderBy: {
+      order: 'asc',
+    },
     include: {
       lessons: {
         include: {
@@ -26,7 +29,13 @@ export const getAll = cache(async () => {
                 },
               },
             },
+            orderBy: {
+              order: 'asc',
+            },
           },
+        },
+        orderBy: {
+          order: 'asc',
         },
       },
     },

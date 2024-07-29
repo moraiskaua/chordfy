@@ -10,13 +10,19 @@ import { ResultCard } from '../ResultCard';
 import { routes } from '@/constants/routes';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
+import { UserSubscription } from '@prisma/client';
+import { InfinityIcon } from 'lucide-react';
 
 interface QuizProps {
   initialPercentage: number;
   initialHearts: number;
   initialLessonId: string;
   initialLessonChallenges: LessonChallengeType[];
-  userSubscription: any;
+  userSubscription:
+    | (UserSubscription & {
+        isActive: boolean;
+      })
+    | null;
 }
 
 export const Quiz: React.FC<QuizProps> = ({
@@ -82,7 +88,10 @@ export const Quiz: React.FC<QuizProps> = ({
           </h1>
           <div className="flex items-center gap-x-4 w-full">
             <ResultCard variant="points" value={challenges.length * 10} />
-            <ResultCard variant="hearts" value={hearts} />
+            <ResultCard
+              variant="hearts"
+              value={userSubscription?.isActive ? 5 : hearts}
+            />
           </div>
         </div>
         <Footer
@@ -100,7 +109,7 @@ export const Quiz: React.FC<QuizProps> = ({
       <Header
         hearts={hearts}
         percentage={percentage}
-        hasActiveSubscription={userSubscription}
+        hasActiveSubscription={!!userSubscription?.isActive}
       />
       <div className="flex-1">
         <div className="h-full flex items-center justify-center">
