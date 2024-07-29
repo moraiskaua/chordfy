@@ -15,8 +15,6 @@ interface UnitProps {
 }
 
 export const Unit: React.FC<UnitProps> = ({
-  id,
-  order,
   title,
   description,
   lessons,
