@@ -20,7 +20,11 @@ export const ChallengeOptionEdit = () => {
           label="Correct Option"
           validate={[required()]}
         />
-        <TextInput source="image" label="Image URL" />
+        <TextInput
+          source="image"
+          label="Image URL"
+          parse={value => (value === '' ? undefined : value)}
+        />
         <TextInput source="audio" label="Audio URL" validate={[required()]} />
         <ReferenceInput source="challengeId" reference="challenges" />
       </SimpleForm>
