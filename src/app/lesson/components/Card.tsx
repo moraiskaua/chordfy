@@ -7,7 +7,7 @@ import { useAudio, useKey } from 'react-use';
 interface CardProps {
   id: string;
   text: string;
-  image?: string;
+  image: string;
   audio: string;
   shortcut: string;
   selected?: boolean;
@@ -56,12 +56,11 @@ export const Card: React.FC<CardProps> = ({
       onClick={handleClick}
     >
       {sound}
-      {image ||
-        (image === '' && (
-          <div className="relative aspect-square mb-4 max-h-[80px] lg:max-h-[150px] w-full">
-            <Image src={image} alt={text} fill />
-          </div>
-        ))}
+      {image && (
+        <div className="relative aspect-square mb-4 max-h-[80px] lg:max-h-[150px] w-full">
+          <Image src={image} alt={text} fill />
+        </div>
+      )}
       <div
         className={cn(
           'flex items-center justify-between',

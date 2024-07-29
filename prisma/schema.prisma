@@ -127,8 +127,8 @@ model ChallengeOption {
   challengeId String  @db.Uuid
   text        String
   correct     Boolean @db.Boolean
-  image       String?
-  audio       String?
+  image       String
+  audio       String
 
   challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 
