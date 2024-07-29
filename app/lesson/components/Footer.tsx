@@ -8,7 +8,7 @@ interface FooterProps {
   onCheck: () => void;
   status: 'CORRECT' | 'WRONG' | 'NONE' | 'COMPLETED';
   disabled?: boolean;
-  lessonId?: boolean;
+  lessonId?: string;
 }
 
 export const Footer: React.FC<FooterProps> = ({
