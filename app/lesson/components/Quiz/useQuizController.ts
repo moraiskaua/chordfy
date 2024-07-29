@@ -1,10 +1,11 @@
 import { updateChallengeProgress } from '@/actions/updateChallengeProgress';
 import { reduceHearts } from '@/actions/updateUserProgress';
 import { useHeartsModal } from '@/stores/useHeartsModal';
+import { usePracticeModal } from '@/stores/usePracticeModal';
 import { Challenge, ChallengeOption, ChallengeType } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
-import { useAudio } from 'react-use';
+import { useAudio, useMount } from 'react-use';
 import { toast } from 'sonner';
 
 export interface LessonChallengeType {
@@ -24,13 +25,15 @@ export const useQuizController = (
   initialLessonId: string,
 ) => {
   const [status, setStatus] = useState<'CORRECT' | 'WRONG' | 'NONE'>('NONE');
-  const [percentage, setPercentage] = useState(initialPercentage);
   const [selectedOption, setSelectedOption] = useState<string>();
   const [challenges] = useState(initialLessonChallenges);
   const [hearts, setHearts] = useState(initialHearts);
   const [pending, startTransition] = useTransition();
   const [lessonId] = useState(initialLessonId);
   const router = useRouter();
+  const [percentage, setPercentage] = useState(() =>
+    initialPercentage === 100 ? 0 : initialPercentage,
+  );
   const [activeIndex, setActiveIndex] = useState(() => {
     const uncompletedIndex = challenges.findIndex(
       challenge => !challenge.completed,
@@ -51,9 +54,16 @@ export const useQuizController = (
   });
 
   const { open: openHeartsModal } = useHeartsModal();
+  const { open: openPracticeModal } = usePracticeModal();
   const currentChallenge = challenges[activeIndex];
   const options = currentChallenge?.challengeOptions ?? [];
   const onNext = () => setActiveIndex(current => current + 1);
+
+  useMount(() => {
+    if (initialPercentage === 100) {
+      openPracticeModal();
+    }
+  });
 
   const onSelect = (id: string) => {
     if (status !== 'NONE') return;

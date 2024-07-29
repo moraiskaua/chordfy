@@ -8,19 +8,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/Dialog';
-import { useExitModal } from '@/stores/useExitModal';
+import { usePracticeModal } from '@/stores/usePracticeModal';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { routes } from '@/constants/routes';
 
-interface ExitModalProps {}
+interface PracticeModalProps {}
 
-export const ExitModal: React.FC<ExitModalProps> = ({}) => {
+export const PracticeModal: React.FC<PracticeModalProps> = ({}) => {
   const [isClient, setIsClient] = useState(false);
-  const { isOpen, close } = useExitModal();
-  const router = useRouter();
+  const { isOpen, close } = usePracticeModal();
 
   useEffect(() => setIsClient(true), []);
   if (!isClient) return null;
@@ -31,17 +28,18 @@ export const ExitModal: React.FC<ExitModalProps> = ({}) => {
         <DialogHeader>
           <div className="flex items-center w-full justify-center mb-5">
             <Image
-              src="/images/mascot_sad.svg"
-              alt="Mascot"
-              width={80}
-              height={80}
+              src="/icons/heart.svg"
+              alt="Heart"
+              width={100}
+              height={100}
             />
           </div>
           <DialogTitle className="text-center font-bold text-2xl">
-            Wait, don&apos;t go!
+            Practice lesson
           </DialogTitle>
           <DialogDescription className="text-center text-base">
-            You&apos;re about to leave the lesson. Are you sure?
+            Use practice lesson to regain hearts and points. You cannot lose
+            hearts or points in practice lessons.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mb-4">
@@ -52,18 +50,7 @@ export const ExitModal: React.FC<ExitModalProps> = ({}) => {
               className="w-full"
               onClick={close}
             >
-              Keep learning
-            </Button>
-            <Button
-              variant="default"
-              size="lg"
-              className="w-full"
-              onClick={() => {
-                close();
-                router.push(routes.LEARN);
-              }}
-            >
-              End session
+              I understand
             </Button>
           </div>
         </DialogFooter>
