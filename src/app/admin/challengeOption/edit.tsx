@@ -23,7 +23,7 @@ export const ChallengeOptionEdit = () => {
         <TextInput
           source="image"
           label="Image URL"
-          parse={value => ('null' ? null : value)}
+          parse={value => (value === 'null' ? null : value)}
         />
         <TextInput source="audio" label="Audio URL" validate={[required()]} />
         <ReferenceInput source="challengeId" reference="challenges" />
