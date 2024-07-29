@@ -8,6 +8,8 @@ import { redirect } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { getMySession } from '@/helpers/getMySession';
 
+const POINTS_TO_REFIL = 20;
+
 export const updateUserProgress = async (courseId: string) => {
   const session = await getMySession();
 
@@ -111,4 +113,31 @@ export const reduceHearts = async (challengeId: string) => {
   revalidatePath(routes.QUESTS);
   revalidatePath(routes.LEADERBOARD);
   revalidatePath(`${routes.LESSON}/${challenge.lessonId}`);
+};
+
+export const refilHearts = async () => {
+  const currentUserProgress = await userService.getProgress();
+
+  if (!currentUserProgress) throw new Error('User progress not found!');
+
+  if (currentUserProgress.hearts === 5)
+    throw new Error('Hearts are already full!');
+
+  if (currentUserProgress.points < POINTS_TO_REFIL)
+    throw new Error('Not enough points!');
+
+  await prisma.userProgress.update({
+    where: {
+      userId: currentUserProgress.userId,
+    },
+    data: {
+      hearts: Math.min(currentUserProgress.hearts + 1, 5),
+      points: currentUserProgress.points - POINTS_TO_REFIL,
+    },
+  });
+
+  revalidatePath(routes.SHOP);
+  revalidatePath(routes.LEARN);
+  revalidatePath(routes.QUESTS);
+  revalidatePath(routes.LEADERBOARD);
 };

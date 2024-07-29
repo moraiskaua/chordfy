@@ -18,11 +18,7 @@ const LearnPage: React.FC<LearnPageProps> = async ({}) => {
   const lessonPercentage = await lessonsService.getPercentage();
   const courseProgress = await coursesService.getProgress();
 
-  if (!userProgress || !userProgress.activeCourse) {
-    redirect(routes.COURSES);
-  }
-
-  if (!courseProgress) {
+  if (!userProgress || !userProgress.activeCourse || !courseProgress) {
     redirect(routes.COURSES);
   }
 
