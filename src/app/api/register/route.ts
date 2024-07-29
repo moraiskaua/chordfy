@@ -10,6 +10,14 @@ export const POST = async (request: NextRequest) => {
     return new NextResponse('Missing fields', { status: 400 });
   }
 
+  const userAlreadyExists = await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+  if (userAlreadyExists) throw new Error('Email already exists');
+
   const hashedPassword = await bcrypt.hash(password, 12);
 
   const user = await prisma.user.create({
