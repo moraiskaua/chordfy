@@ -58,11 +58,8 @@ export const Items: React.FC<ItemsProps> = ({
             Unlimited hearts
           </p>
         </div>
-        <Button
-          disabled={pending || hasActiveSubscription}
-          onClick={handleUpgrade}
-        >
-          {hasActiveSubscription ? 'Active' : 'Upgrade'}
+        <Button disabled={pending} onClick={handleUpgrade}>
+          {hasActiveSubscription ? 'Settings' : 'Upgrade'}
         </Button>
       </div>
     </ul>
