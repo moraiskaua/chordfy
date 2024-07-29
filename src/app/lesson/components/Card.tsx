@@ -56,7 +56,7 @@ export const Card: React.FC<CardProps> = ({
       onClick={handleClick}
     >
       {sound}
-      {image && (
+      {image == '' && (
         <div className="relative aspect-square mb-4 max-h-[80px] lg:max-h-[150px] w-full">
           <Image src={image} alt={text} fill />
         </div>
