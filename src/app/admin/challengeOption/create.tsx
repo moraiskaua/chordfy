@@ -13,7 +13,6 @@ export const ChallengeOptionCreate = () => {
   return (
     <Create>
       <SimpleForm>
-        <TextInput source="id" label="Id" validate={[required()]} />
         <TextInput source="text" label="Question" validate={[required()]} />
         <BooleanInput
           source="correct"
