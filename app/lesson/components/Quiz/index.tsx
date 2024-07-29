@@ -40,6 +40,10 @@ export const Quiz: React.FC<QuizProps> = ({
     initialLessonChallenges,
   );
 
+  if (!currentChallenge) {
+    return <div>Finished Challenge!!</div>;
+  }
+
   return (
     <>
       {correctAudio}

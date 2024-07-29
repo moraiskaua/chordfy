@@ -91,6 +91,13 @@ const main = async () => {
           order: 1,
           question: 'Which note?',
         },
+        {
+          id: 'd18420cc-a645-4989-be93-fd20a3c5fa9f',
+          lessonId: '0c733e03-a7db-43f7-b0ef-f7003028576c',
+          type: 'ASSIST',
+          order: 2,
+          question: 'which note represents the major seventh of C?',
+        },
       ],
     });
 
@@ -147,6 +154,43 @@ const main = async () => {
           image: '',
           text: 'A',
           correct: false,
+          audio: '/piano/A.mp3',
+        },
+      ],
+    });
+
+    await prisma.challengeOption.createMany({
+      data: [
+        {
+          id: '54d850bd-2521-4a7c-a9fc-9e5f6e462dad',
+          challengeId: 'd18420cc-a645-4989-be93-fd20a3c5fa9f',
+          image: '',
+          text: 'E',
+          correct: false,
+          audio: '/piano/E.mp3',
+        },
+        {
+          id: '1fc00fc7-4689-49e1-b63d-32d28397090f',
+          challengeId: 'd18420cc-a645-4989-be93-fd20a3c5fa9f',
+          image: '',
+          text: 'F',
+          correct: false,
+          audio: '/piano/F.mp3',
+        },
+        {
+          id: '6c41d4b7-df0f-4c0a-9f23-b69d067294f9',
+          challengeId: 'd18420cc-a645-4989-be93-fd20a3c5fa9f',
+          image: '',
+          text: 'G',
+          correct: false,
+          audio: '/piano/G.mp3',
+        },
+        {
+          id: 'e83c585c-96e2-4c59-9f9f-80b825b5c4c9',
+          challengeId: 'd18420cc-a645-4989-be93-fd20a3c5fa9f',
+          image: '',
+          text: 'A',
+          correct: true,
           audio: '/piano/A.mp3',
         },
       ],
