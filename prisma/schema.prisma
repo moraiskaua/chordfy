@@ -9,10 +9,10 @@ datasource db {
 
 model User {
   id            String    @id @default(uuid()) @db.Uuid
-  image         String?   @db.Text
-  name          String?   @db.Text
+  image         String?
+  name          String?
   email         String?   @unique
-  password      String?   @db.Text
+  password      String?
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
   emailVerified DateTime?
@@ -56,11 +56,11 @@ model Session {
 
 model UserProgress {
   userId           String @id @db.Uuid
-  user_name        String @default("User") @db.Text
-  user_image       String @default("") @db.Text
+  active_course_id String @db.Uuid
+  user_name        String @default("User")
+  user_image       String @default("")
   hearts           Int    @default(5)
   points           Int    @default(0)
-  active_course_id String @db.Uuid
 
   activeCourse Course @relation("CourseUserProgress", fields: [active_course_id], references: [id], onDelete: Cascade)
 
@@ -69,8 +69,8 @@ model UserProgress {
 
 model Course {
   id    String @id @default(uuid()) @db.Uuid
-  title String @db.Text
-  image String @db.Text
+  title String
+  image String
 
   userProgress UserProgress[] @relation("CourseUserProgress")
   units        Unit[]
@@ -81,9 +81,9 @@ model Course {
 model Unit {
   id          String @id @default(uuid()) @db.Uuid
   courseId    String @db.Uuid
-  title       String @db.Text
-  description String @db.Text
-  order       Int    @db.Integer
+  title       String
+  description String
+  order       Int
 
   course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   lessons Lesson[]
@@ -94,8 +94,8 @@ model Unit {
 model Lesson {
   id     String @id @default(uuid()) @db.Uuid
   unitId String @db.Uuid
-  title  String @db.Text
-  order  Int    @db.Integer
+  title  String
+  order  Int
 
   unit       Unit        @relation(fields: [unitId], references: [id], onDelete: Cascade)
   challenges Challenge[]
@@ -106,8 +106,8 @@ model Lesson {
 model Challenge {
   id       String        @id @default(uuid()) @db.Uuid
   lessonId String        @db.Uuid
-  question String        @db.Text
-  order    Int           @db.Integer
+  question String
+  order    Int
   type     ChallengeType
 
   lesson            Lesson              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
@@ -125,10 +125,10 @@ enum ChallengeType {
 model ChallengeOption {
   id          String  @id @default(uuid()) @db.Uuid
   challengeId String  @db.Uuid
-  text        String  @db.Text
+  text        String
   correct     Boolean @db.Boolean
-  image       String  @db.Text
-  audio       String  @db.Text
+  image       String
+  audio       String
 
   challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 
@@ -142,4 +142,15 @@ model ChallengeProgress {
   completed   Boolean @default(false) @db.Boolean
 
   challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+}
+
+model UserSubscription {
+  id                        String   @id @default(uuid()) @db.Uuid
+  userId                    String   @db.Uuid
+  stripe_customer_id        String   @unique
+  stripe_subscription_id    String   @unique
+  stripe_price_id           String
+  stripe_current_period_end DateTime
+
+  @@map("user_subscription")
 }
