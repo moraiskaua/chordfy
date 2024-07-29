@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:push": "npx prisma db push",
     "db:seed": "tsx ./src/scripts/seed.ts",
-    "postinstall": "prisma generate && db:push"
+    "postinstall": "prisma generate && npx prisma db push"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
