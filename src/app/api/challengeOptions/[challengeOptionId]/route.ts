@@ -4,14 +4,14 @@ import { NextResponse } from 'next/server';
 
 export const GET = async (
   request: Request,
-  { params }: { params: { challendOptionId: string } },
+  { params }: { params: { challengeOptionId: string } },
 ) => {
   const isAdmin = await getIsAdmin();
   if (!isAdmin) return new NextResponse('Unauthorized!', { status: 401 });
 
   const data = await prisma.challengeOption.findFirst({
     where: {
-      id: params.challendOptionId,
+      id: params.challengeOptionId,
     },
   });
 
@@ -20,7 +20,7 @@ export const GET = async (
 
 export const PUT = async (
   request: Request,
-  { params }: { params: { challendOptionId: string } },
+  { params }: { params: { challengeOptionId: string } },
 ) => {
   const isAdmin = await getIsAdmin();
   if (!isAdmin) return new NextResponse('Unauthorized!', { status: 401 });
@@ -28,7 +28,7 @@ export const PUT = async (
   const body = await request.json();
   const data = await prisma.challengeOption.update({
     where: {
-      id: params.challendOptionId,
+      id: params.challengeOptionId,
     },
     data: {
       ...body,
@@ -43,7 +43,7 @@ export const DELETE = async (
   {
     params,
   }: {
-    params: { challendOptionId: string };
+    params: { challengeOptionId: string };
   },
 ) => {
   const isAdmin = await getIsAdmin();
@@ -51,7 +51,7 @@ export const DELETE = async (
 
   const data = await prisma.challengeOption.delete({
     where: {
-      id: params.challendOptionId,
+      id: params.challengeOptionId,
     },
   });
 
