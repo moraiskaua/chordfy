@@ -6,6 +6,7 @@ import { userService } from '@/src/services/userService';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import { Progress } from '@/src/components/ui/Progress';
+import { Promo } from '@/src/components/Promo';
 
 const quests = [
   {
@@ -37,6 +38,7 @@ const QuestsPage: React.FC = async ({}) => {
           points={userProgress.points}
           hasActiveSubscription={!!userSubscription?.isActive}
         />
+        {!!!userSubscription?.isActive && <Promo />}
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">

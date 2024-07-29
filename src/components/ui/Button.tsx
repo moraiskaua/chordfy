@@ -28,6 +28,8 @@ const buttonVariants = cva(
           'border-2 border-[#8152AB]/25 bg-[#C47BFD]/25 hover:bg-[#C47BFD]/25',
         locked:
           'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0',
+        super:
+          'bg-indigo-500 text-primary-foreground hover:bg-indigo-500/90 border-indigo-600 border-b-4 active:border-b-0',
       },
       size: {
         default: 'h-11 px-4 py-2',
