@@ -5,4 +5,6 @@ export const env = {
   STRIPE_API_KEY: process.env.STRIPE_API_KEY,
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+  OWNER_ID: process.env.OWNER_ID,
+  SUBOWNER_ID: process.env.SUBOWNER_ID,
 };
